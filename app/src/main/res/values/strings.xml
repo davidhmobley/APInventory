@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AP Inventory</string>
+    <string name="app_title">AP Inventory</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Splash Activity -->
+    <string name="splash_company_name">Agency</string>
+    <string name="splash_copyright">copyright 2019</string>
+
+    <!-- Main Activity -->
+    <string name="main_subtitle">Home</string>
+    <string name="mainAIN">AIN:</string>
+    <string name="mainCIC">CIC:</string>
+    <string name="mainCMR">CMR:</string>
+    <string name="mainAssets">Num Assets:</string>
+    <string name="mainLocations">Num Locations:</string>
+
+</resources>
