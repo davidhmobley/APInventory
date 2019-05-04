@@ -82,27 +82,34 @@ public class SqlDataSource {
 	}
 
 
-    /*****************************/
-    /***** ASSETS Functions *****/
-    /*****************************/
+	/*****************************/
+	/***** ASSETS Functions *****/
+	/*****************************/
 
-    public void insertAssets(String assetNum, String bcn, String cic, String cmr) {
-        // INSERT!
-        ContentValues values = new ContentValues();
+	public void insertAssets(String assetNum, String bcn, String cic, String cmr) {
+		// INSERT!
+		ContentValues values = new ContentValues();
 
-        //values.put(Account.ACCT_COL_ID, acct.getId());
-        values.put(Assets.ASSETS_COL_NUM, assetNum);
+		//values.put(Account.ACCT_COL_ID, acct.getId());
+		values.put(Assets.ASSETS_COL_NUM, assetNum);
 		values.put(Assets.ASSETS_COL_BCN, bcn);
 		values.put(Assets.ASSETS_COL_CIC, cic);
 		values.put(Assets.ASSETS_COL_CMR, cmr);
 
-        // Insert the record
-        mDatabase.insert(Assets.ASSETS_TABLE_NAME, null, values);
-    }
+		// Insert the record
+		mDatabase.insert(Assets.ASSETS_TABLE_NAME, null, values);
+	}
 
-    public void deleteActions() {
-        mDatabase.delete(Assets.ASSETS_TABLE_NAME, null, null);
-    }
+	public void deleteAssets() {
+		mDatabase.delete(Assets.ASSETS_TABLE_NAME, null, null);
+	}
+
+	public long getNumAssets() {
+		long count = 0;
+		count = DatabaseUtils.queryNumEntries(mDatabase, Assets.ASSETS_TABLE_NAME);
+
+		return count;
+	}
 
 	public List<Assets> getAllAssets() {
 		List<Assets> assets = new ArrayList<>();
@@ -131,5 +138,60 @@ public class SqlDataSource {
 		}
 
 		return assets;
+	}
+
+
+	/*******************************/
+	/***** LOCATIONS Functions *****/
+	/*******************************/
+
+	public void insertLocations(String locNum, String locDesc) {
+		// INSERT!
+		ContentValues values = new ContentValues();
+
+		//values.put(Locations.LOCATIONS_COL_ID, acct.getId());
+		values.put(Locations.LOCATIONS_COL_NUM, locNum);
+		values.put(Locations.LOCATIONS_COL_DESC, locDesc);
+
+		// Insert the record
+		mDatabase.insert(Locations.LOCATIONS_TABLE_NAME, null, values);
+	}
+
+	public void deleteLocations() {
+		mDatabase.delete(Locations.LOCATIONS_TABLE_NAME, null, null);
+	}
+
+	public long getNumLocations() {
+		long count = 0;
+		count = DatabaseUtils.queryNumEntries(mDatabase, Locations.LOCATIONS_TABLE_NAME);
+
+		return count;
+	}
+
+	public List<Locations> getAllLocations() {
+		List<Locations> locations = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Locations.LOCATIONS_TABLE_NAME,
+				allLocationsCols,
+				null,
+				null,
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				locations.add(new Locations(
+						//c.getInt(0), // id
+						c.getString(1), // locationNum
+						c.getString(2))); // locationDesc
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return locations;
 	}
 }

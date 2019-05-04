@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.R;
+import com.mobley.apinventory.sql.SqlDataSource;
 
 public class MainActivity extends AppCompatActivity {
     protected static final String TAG = MainActivity.class.getSimpleName();
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mAinET, mCicET, mCmrET;
 
     private APInventoryApp mApp;
+    private SqlDataSource mSqlDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
 
         mApp = (APInventoryApp) getApplication();
+        mSqlDataSource = new SqlDataSource(this);
+
         setContentView(R.layout.activity_main);
 
         mAinTV = findViewById(R.id.mainAINTV);
@@ -99,9 +103,10 @@ public class MainActivity extends AppCompatActivity {
         mCicET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
         mCmrET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
 
-        // TODO: fake data
-        mNumAssetsTV2.setText(String.valueOf(5555555));
-        mNumLocationsTV2.setText(String.valueOf(7777777));
+        mSqlDataSource.open();
+        mNumAssetsTV2.setText(String.valueOf(mSqlDataSource.getNumAssets()));
+        mNumLocationsTV2.setText(String.valueOf(mSqlDataSource.getNumLocations()));
+        mSqlDataSource.close();
     }
 
     private void verifyPermissions(Activity context) {
