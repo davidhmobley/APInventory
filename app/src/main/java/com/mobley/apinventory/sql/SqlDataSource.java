@@ -8,7 +8,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.mobley.contactdavid3.sql.tables.Actions;
+import com.mobley.apinventory.sql.tables.Assets;
+import com.mobley.apinventory.sql.tables.Locations;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,11 +26,18 @@ public class SqlDataSource {
 	private SQLiteDatabase mDatabase;
 	private SqlHelper mSqlHelper;
 
-	private String[] allActionsCols = {
-			Actions.ACTIONS_COL_ID,
-			Actions.ACTIONS_COL_TYPE,
-			Actions.ACTIONS_COL_TIMESTAMP,
-			Actions.ACTIONS_COL_SENDTO
+	private String[] allAssetsCols = {
+			Assets.ASSETS_COL_ID,
+			Assets.ASSETS_COL_NUM,
+			Assets.ASSETS_COL_BCN,
+			Assets.ASSETS_COL_CIC,
+			Assets.ASSETS_COL_CMR
+	};
+
+	private String[] allLocationsCols = {
+			Locations.LOCATIONS_COL_ID,
+			Locations.LOCATIONS_COL_NUM,
+			Locations.LOCATIONS_COL_DESC
 	};
 
 	/** ctor */
@@ -75,31 +83,32 @@ public class SqlDataSource {
 
 
     /*****************************/
-    /***** ACTIONS Functions *****/
+    /***** ASSETS Functions *****/
     /*****************************/
 
-    public void insertActions(String actionType, long actionTimestamp, String sendTo) {
+    public void insertAssets(String assetNum, String bcn, String cic, String cmr) {
         // INSERT!
         ContentValues values = new ContentValues();
 
         //values.put(Account.ACCT_COL_ID, acct.getId());
-        values.put(Actions.ACTIONS_COL_TYPE, actionType);
-		values.put(Actions.ACTIONS_COL_TIMESTAMP, actionTimestamp);
-		values.put(Actions.ACTIONS_COL_SENDTO, sendTo);
+        values.put(Assets.ASSETS_COL_NUM, assetNum);
+		values.put(Assets.ASSETS_COL_BCN, bcn);
+		values.put(Assets.ASSETS_COL_CIC, cic);
+		values.put(Assets.ASSETS_COL_CMR, cmr);
 
         // Insert the record
-        mDatabase.insert(Actions.ACTIONS_TABLE_NAME, null, values);
+        mDatabase.insert(Assets.ASSETS_TABLE_NAME, null, values);
     }
 
     public void deleteActions() {
-        mDatabase.delete(Actions.ACTIONS_TABLE_NAME, null, null);
+        mDatabase.delete(Assets.ASSETS_TABLE_NAME, null, null);
     }
 
-	public List<Actions> getAllActions() {
-		List<Actions> actions = new ArrayList<>();
+	public List<Assets> getAllAssets() {
+		List<Assets> assets = new ArrayList<>();
 
-		Cursor c = mDatabase.query(Actions.ACTIONS_TABLE_NAME,
-				allActionsCols,
+		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
+				allAssetsCols,
 				null,
 				null,
 				null,
@@ -109,17 +118,18 @@ public class SqlDataSource {
 		if (c != null) {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
-				actions.add(new Actions(
+				assets.add(new Assets(
 						//c.getInt(0), // id
-						c.getString(1), // type
-						c.getLong(2), // timestamp
-						c.getString(3))); // sendTo
+						c.getString(1), // assetNum
+						c.getString(2), // barcodeNum
+						c.getString(3), // cic
+						c.getString(4))); // cmr
 
 				c.moveToNext();
 			}
 			c.close();
 		}
 
-		return actions;
+		return assets;
 	}
 }
