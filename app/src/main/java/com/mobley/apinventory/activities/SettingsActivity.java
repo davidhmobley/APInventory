@@ -27,12 +27,10 @@ public class SettingsActivity extends PreferenceActivity {
 
 		mApp = (APInventoryApp) getApplication();
 
-		/** TODO: figure out
 		getActionBar().setDisplayHomeAsUpEnabled(true);
        	getActionBar().setTitle(getString(R.string.app_name));
        	getActionBar().setSubtitle(getResources().getString(R.string.pref_subtitle));
-		 **/
-       	
+
        	setTheme(android.R.style.Theme_Holo);
 	}
 
