@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_category_ain" >
+        <EditTextPreference
+            android:key="@string/pref_ain_key"
+            android:title="@string/pref_ain_title"
+            android:summary="@string/pref_ain_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_cic" >
+        <EditTextPreference
+            android:key="@string/pref_cic_key"
+            android:title="@string/pref_cic_title"
+            android:summary="@string/pref_cic_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_cmr" >
+        <EditTextPreference
+            android:key="@string/pref_cmr_key"
+            android:title="@string/pref_cmr_title"
+            android:summary="@string/pref_cmr_summary" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,8 +1,13 @@
 package com.mobley.apinventory.activities;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,13 +17,18 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.R;
 
 public class MainActivity extends AppCompatActivity {
     protected static final String TAG = MainActivity.class.getSimpleName();
 
+    public static final int REQUEST_READ_WRITE_PERMISSION = 1;
+
     private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumLocationsTV2;
     private EditText mAinET, mCicET, mCmrET;
+
+    private APInventoryApp mApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
+        mApp = (APInventoryApp) getApplication();
         setContentView(R.layout.activity_main);
 
         mAinTV = findViewById(R.id.mainAINTV);
@@ -44,12 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mCicET = findViewById(R.id.mainCICET);
         mCmrET = findViewById(R.id.mainCMRET);
 
-        // fake data
-        mAinET.setText(String.valueOf(2380351));
-        mCicET.setText(String.valueOf(2342));
-        mCmrET.setText(String.valueOf(234));
-        mNumAssetsTV2.setText(String.valueOf(5555555));
-        mNumLocationsTV2.setText(String.valueOf(7777777));
+        verifyPermissions(this);
     }
 
     @Override
@@ -61,16 +67,63 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        boolean bOK = false;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()) {
+            case R.id.action_settings:
+                bOK = true; // processed
+
+                Intent preferencesIntent = new Intent(this, SettingsActivity.class);
+                startActivity(preferencesIntent);
+
+                break;
+            case R.id.action_exit:
+                bOK = true; // processed
+
+                onBackPressed();
+
+                break;
+            default:
+                bOK = super.onOptionsItemSelected(item);
+                break;
         }
 
-        return super.onOptionsItemSelected(item);
+        return bOK;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mAinET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
+        mCicET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
+        mCmrET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
+
+        // TODO: fake data
+        mNumAssetsTV2.setText(String.valueOf(5555555));
+        mNumLocationsTV2.setText(String.valueOf(7777777));
+    }
+
+    private void verifyPermissions(Activity context) {
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(context,
+                    new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    Manifest.permission.READ_EXTERNAL_STORAGE },
+                    REQUEST_READ_WRITE_PERMISSION);
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+        switch(requestCode) {
+            case(REQUEST_READ_WRITE_PERMISSION):
+                if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) {
+                    // got it!
+                    mApp.setReadWriteGranted(true);
+                } else {
+                    mApp.setReadWriteGranted(false);
+                }
+                break;
+        }
     }
 }
