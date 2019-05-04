@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumLocationsTV2;
     private EditText mAinET, mCicET, mCmrET;
-    private Button mImportButton;
+    private Button mImportButton, mViewAssetsButton, mViewLocationsButton;
 
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource;
@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mImportButton = findViewById(R.id.mainImportButton);
         mImportButton.setOnClickListener(this);
+        mViewAssetsButton = findViewById(R.id.mainViewAssetsButton);
+        mViewAssetsButton.setOnClickListener(this);
+        mViewLocationsButton = findViewById(R.id.mainViewLocationsButton);
+        mViewLocationsButton.setOnClickListener(this);
 
         verifyPermissions(this);
 
@@ -209,6 +213,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AlertDialog confirm = builder.create();
             confirm.show();
 
+        } else if (view == mViewAssetsButton) {
+            Intent intent = new Intent(this, ViewAssetsActivity.class);
+            startActivity(intent);
+        } else if (view == mViewLocationsButton) {
+            // TODO: code here.
         }
     }
 }

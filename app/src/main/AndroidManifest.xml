@@ -24,6 +24,8 @@
 
         <activity android:name=".activities.MainActivity"/>
 
+        <activity android:name=".activities.ViewAssetsActivity"/>
+
         <activity android:name=".activities.SettingsActivity"
             android:theme="@android:style/Theme.Holo"
             android:exported="false" />

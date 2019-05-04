@@ -4,6 +4,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_exit">Exit</string>
+    <string name="action_return">Return</string>
 
     <!-- Splash Activity -->
     <string name="splash_company_name">Agency</string>
@@ -22,6 +23,13 @@
     <string name="main_import_text">Import</string>
     <string name="main_alert_verify_delete">Delete All Data?</string>
     <string name="main_alert_delete_msg">Are you sure?</string>
+    <string name="main_view_assets_text">View Assets</string>
+    <string name="main_view_locations_text">View Locations</string>
+
+    <!-- View Assets Activity -->
+    <string name="view_assets_subtitle">All Assets</string>
+    <string name="asset_cic_label">CIC:</string>
+    <string name="asset_cmr_label">CMR:</string>
 
     <string name="default_ain"></string>
     <string name="default_cic"></string>
