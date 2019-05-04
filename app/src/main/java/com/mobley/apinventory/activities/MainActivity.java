@@ -2,6 +2,8 @@ package com.mobley.apinventory.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,23 +13,27 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mobley.apinventory.APInventoryApp;
+import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.SqlDataSource;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     protected static final String TAG = MainActivity.class.getSimpleName();
 
     public static final int REQUEST_READ_WRITE_PERMISSION = 1;
 
     private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumLocationsTV2;
     private EditText mAinET, mCicET, mCmrET;
+    private Button mImportButton;
 
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource;
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (LogConfig.ON) Log.d(TAG, "onCreate()");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
@@ -59,7 +66,19 @@ public class MainActivity extends AppCompatActivity {
         mCicET = findViewById(R.id.mainCICET);
         mCmrET = findViewById(R.id.mainCMRET);
 
+        mImportButton = findViewById(R.id.mainImportButton);
+        mImportButton.setOnClickListener(this);
+
         verifyPermissions(this);
+
+        // TODO: insert some dummy data
+        mSqlDataSource.open();
+        mSqlDataSource.insertAssets("12345", "99999", "123", "444");
+        mSqlDataSource.insertAssets("23456", "9898", "123", "444");
+        mSqlDataSource.insertLocations("1", "Location1");
+        mSqlDataSource.insertLocations("2", "Location2");
+        mSqlDataSource.insertLocations("3", "Location3");
+        mSqlDataSource.close();
     }
 
     @Override
@@ -98,10 +117,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (LogConfig.ON) Log.d(TAG, "onResume()");
 
         mAinET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
         mCicET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
         mCmrET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
+
+        checkDBCounts();
+    }
+
+    private void checkDBCounts() {
+        if (LogConfig.ON) Log.d(TAG, "checkDBCounts()");
 
         mSqlDataSource.open();
         mNumAssetsTV2.setText(String.valueOf(mSqlDataSource.getNumAssets()));
@@ -110,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verifyPermissions(Activity context) {
+        if (LogConfig.ON) Log.d(TAG, "verifyPermissions()");
+
         int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(context,
@@ -120,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
+        if (LogConfig.ON) Log.d(TAG, "onRequestPermissionsResult()");
+
         switch(requestCode) {
             case(REQUEST_READ_WRITE_PERMISSION):
                 if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) {
@@ -129,6 +159,56 @@ public class MainActivity extends AppCompatActivity {
                     mApp.setReadWriteGranted(false);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (LogConfig.ON) Log.d(TAG, "onClick()");
+
+        if (view == mImportButton) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true)
+                    .setTitle(getString(R.string.main_alert_verify_delete))
+                    .setMessage(getString(R.string.main_alert_delete_msg))
+                    .setCancelable(false)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            int nAssetsDeleted = 0, nLocationsDeleted = 0;
+
+                            mSqlDataSource.open();
+                            mSqlDataSource.beginTransaction();
+
+                            nAssetsDeleted = mSqlDataSource.deleteAssets();
+                            nLocationsDeleted = mSqlDataSource.deleteLocations();
+
+                            if (nAssetsDeleted == 0 || nLocationsDeleted == 0) {
+                                // rollback
+                            } else {
+                                mSqlDataSource.commitTransaction();
+                            }
+                            mSqlDataSource.endTransaction();
+                            mSqlDataSource.close();
+
+                            checkDBCounts();
+
+                            dialog.cancel(); // get out!
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            dialog.cancel(); // get out!
+                        }
+                    });
+
+            AlertDialog confirm = builder.create();
+            confirm.show();
+
         }
     }
 }

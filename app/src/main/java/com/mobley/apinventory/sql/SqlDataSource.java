@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
 
@@ -87,7 +88,8 @@ public class SqlDataSource {
 	/*****************************/
 
 	public void insertAssets(String assetNum, String bcn, String cic, String cmr) {
-		// INSERT!
+		if (LogConfig.ON) Log.d(TAG, "insertAssets()");
+
 		ContentValues values = new ContentValues();
 
 		//values.put(Account.ACCT_COL_ID, acct.getId());
@@ -100,18 +102,26 @@ public class SqlDataSource {
 		mDatabase.insert(Assets.ASSETS_TABLE_NAME, null, values);
 	}
 
-	public void deleteAssets() {
-		mDatabase.delete(Assets.ASSETS_TABLE_NAME, null, null);
+	public int deleteAssets() {
+		if (LogConfig.ON) Log.d(TAG, "deleteAssets()");
+
+		int count = mDatabase.delete(Assets.ASSETS_TABLE_NAME, "1", null);
+		if (LogConfig.ON) Log.d(TAG, "...count: " + count);
+
+		return count;
 	}
 
 	public long getNumAssets() {
-		long count = 0;
-		count = DatabaseUtils.queryNumEntries(mDatabase, Assets.ASSETS_TABLE_NAME);
+		if (LogConfig.ON) Log.d(TAG, "getNumAssets()");
+
+		long count = DatabaseUtils.queryNumEntries(mDatabase, Assets.ASSETS_TABLE_NAME);
 
 		return count;
 	}
 
 	public List<Assets> getAllAssets() {
+		if (LogConfig.ON) Log.d(TAG, "getAllAssets()");
+
 		List<Assets> assets = new ArrayList<>();
 
 		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
@@ -146,7 +156,8 @@ public class SqlDataSource {
 	/*******************************/
 
 	public void insertLocations(String locNum, String locDesc) {
-		// INSERT!
+		if (LogConfig.ON) Log.d(TAG, "insertLocations()");
+
 		ContentValues values = new ContentValues();
 
 		//values.put(Locations.LOCATIONS_COL_ID, acct.getId());
@@ -157,18 +168,26 @@ public class SqlDataSource {
 		mDatabase.insert(Locations.LOCATIONS_TABLE_NAME, null, values);
 	}
 
-	public void deleteLocations() {
-		mDatabase.delete(Locations.LOCATIONS_TABLE_NAME, null, null);
+	public int deleteLocations() {
+		if (LogConfig.ON) Log.d(TAG, "deleteLocations()");
+
+		int count = mDatabase.delete(Locations.LOCATIONS_TABLE_NAME, "1", null);
+		if (LogConfig.ON) Log.d(TAG, "...count: " + count);
+
+		return count;
 	}
 
 	public long getNumLocations() {
-		long count = 0;
-		count = DatabaseUtils.queryNumEntries(mDatabase, Locations.LOCATIONS_TABLE_NAME);
+		if (LogConfig.ON) Log.d(TAG, "getNumLocations()");
+
+		long count = DatabaseUtils.queryNumEntries(mDatabase, Locations.LOCATIONS_TABLE_NAME);
 
 		return count;
 	}
 
 	public List<Locations> getAllLocations() {
+		if (LogConfig.ON) Log.d(TAG, "getAllLocations()");
+
 		List<Locations> locations = new ArrayList<>();
 
 		Cursor c = mDatabase.query(Locations.LOCATIONS_TABLE_NAME,

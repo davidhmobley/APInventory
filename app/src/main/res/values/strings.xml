@@ -19,6 +19,9 @@
     <string name="mainCMR">CMR:</string>
     <string name="mainAssets">Num Assets:</string>
     <string name="mainLocations">Num Locations:</string>
+    <string name="main_import_text">Import</string>
+    <string name="main_alert_verify_delete">Delete All Data?</string>
+    <string name="main_alert_delete_msg">Are you sure?</string>
 
     <string name="default_ain"></string>
     <string name="default_cic"></string>
