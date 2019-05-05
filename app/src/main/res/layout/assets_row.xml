@@ -19,7 +19,7 @@
 
             <TextView
                 android:id="@+id/assetsNum"
-                style="@style/My_Assets_TextAppearance"
+                style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/assetsCicLabel"
-                style="@style/My_Assets_TextAppearance"
+                style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/asset_cic_label"/>
@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/assetsCmrLabel"
-                style="@style/My_Assets_TextAppearance"
+                style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/asset_cmr_label"/>

@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/locationsNum"
-            style="@style/My_Assets_TextAppearance"
+            style="@style/My_Bold_TextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

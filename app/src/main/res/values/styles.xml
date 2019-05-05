@@ -35,7 +35,13 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="My_Assets_TextAppearance">
+    <style name="My_Normal_TextAppearance">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_smallmedium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="My_Bold_TextAppearance">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/text_size_smallmedium</item>
         <item name="android:textStyle">bold</item>

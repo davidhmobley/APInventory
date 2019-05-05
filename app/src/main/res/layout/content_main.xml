@@ -27,6 +27,7 @@
 
                 <TextView
                     android:id="@+id/mainAINTV"
+                    style="@style/My_Bold_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
@@ -34,6 +35,7 @@
 
                 <TextView
                     android:id="@+id/mainAINTV2"
+                    style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -48,6 +50,7 @@
 
                 <TextView
                     android:id="@+id/mainCICTV"
+                    style="@style/My_Bold_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
@@ -55,6 +58,7 @@
 
                 <TextView
                     android:id="@+id/mainCICTV2"
+                    style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -69,6 +73,7 @@
 
                 <TextView
                     android:id="@+id/mainCMRTV"
+                    style="@style/My_Bold_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
@@ -76,6 +81,7 @@
 
                 <TextView
                     android:id="@+id/mainCMRTV2"
+                    style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -90,6 +96,7 @@
 
                 <TextView
                     android:id="@+id/mainAssetsTV"
+                    style="@style/My_Bold_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
@@ -97,6 +104,7 @@
 
                 <TextView
                     android:id="@+id/mainAssetsTV2"
+                    style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"/>
@@ -110,6 +118,7 @@
 
                 <TextView
                     android:id="@+id/mainLocationsTV"
+                    style="@style/My_Bold_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
@@ -117,6 +126,7 @@
 
                 <TextView
                     android:id="@+id/mainLocationsTV2"
+                    style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"/>
