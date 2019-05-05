@@ -138,7 +138,7 @@
             android:id="@+id/mainButtonLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal"
             android:layout_centerInParent="true"
             android:layout_below="@id/mainTableLayout1">
@@ -151,13 +151,32 @@
                 android:text="@string/main_scan_text"
                 android:textColor="@android:color/white"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mainButtonLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/mainButtonLayout1">
+
             <Button
                 android:id="@+id/mainImportButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:background="@drawable/text_button_selector"
                 android:text="@string/main_import_text"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/mainExportButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/text_button_selector"
+                android:text="@string/main_export_text"
                 android:textColor="@android:color/white"/>
 
         </LinearLayout>

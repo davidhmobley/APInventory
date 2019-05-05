@@ -24,6 +24,7 @@
     <string name="mainLocations">Num Locations:</string>
     <string name="main_scan_text">Scan</string>
     <string name="main_import_text">Import</string>
+    <string name="main_export_text">Export</string>
     <string name="main_alert_verify_delete">Delete All Data?</string>
     <string name="main_alert_delete_msg">Are you sure?</string>
 
