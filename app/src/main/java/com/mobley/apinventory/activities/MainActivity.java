@@ -25,6 +25,7 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.SqlDataSource;
+import com.mobley.apinventory.utilities.ImportTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     protected static final String TAG = MainActivity.class.getSimpleName();
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkDBCounts();
     }
 
-    private void checkDBCounts() {
+    public void checkDBCounts() {
         if (LogConfig.ON) Log.d(TAG, "checkDBCounts()");
 
         mSqlDataSource.open();
@@ -187,23 +188,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            int nAssetsDeleted = 0, nLocationsDeleted = 0;
-
-                            mSqlDataSource.open();
-                            mSqlDataSource.beginTransaction();
-
-                            nAssetsDeleted = mSqlDataSource.deleteAssets();
-                            nLocationsDeleted = mSqlDataSource.deleteLocations();
-
-                            if (nAssetsDeleted == 0 || nLocationsDeleted == 0) {
-                                // rollback
-                            } else {
-                                mSqlDataSource.commitTransaction();
-                            }
-                            mSqlDataSource.endTransaction();
-                            mSqlDataSource.close();
-
-                            checkDBCounts();
+                            ImportTask importTask = new ImportTask(MainActivity.this, mSqlDataSource);
+                            importTask.execute();
 
                             dialog.cancel(); // get out!
                         }

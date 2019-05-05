@@ -34,6 +34,8 @@
     <!-- View Locations Activity -->
     <string name="view_locations_subtitle">All Locations</string>
 
+    <string name="progress_msg">Please wait...</string>
+
     <string name="default_ain"></string>
     <string name="default_cic"></string>
     <string name="default_cmr"></string>
