@@ -78,10 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // TODO: insert some dummy data
         mSqlDataSource.open();
         mSqlDataSource.insertAssets("12345", "99999", "123", "444");
-        mSqlDataSource.insertAssets("23456", "9898", "123", "444");
+        mSqlDataSource.insertAssets("23456", "98988", "123", "444");
+        mSqlDataSource.insertAssets("34567", "66666", "123", "444");
+        mSqlDataSource.insertAssets("45678", "77777", "123", "444");
+        mSqlDataSource.insertAssets("56789", "88888", "123", "444");
+        mSqlDataSource.insertAssets("67890", "98976", "123", "444");
         mSqlDataSource.insertLocations("1", "Location1");
         mSqlDataSource.insertLocations("2", "Location2");
         mSqlDataSource.insertLocations("3", "Location3");
+        mSqlDataSource.insertLocations("4", "Location4");
+        mSqlDataSource.insertLocations("5", "Location5");
+        mSqlDataSource.insertLocations("6", "Location6");
         mSqlDataSource.close();
     }
 
@@ -217,7 +224,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, ViewAssetsActivity.class);
             startActivity(intent);
         } else if (view == mViewLocationsButton) {
-            // TODO: code here.
+            Intent intent = new Intent(this, ViewLocationsActivity.class);
+            startActivity(intent);
         }
     }
 }
