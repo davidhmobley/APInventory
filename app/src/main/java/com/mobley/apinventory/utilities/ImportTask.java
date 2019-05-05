@@ -11,13 +11,14 @@ import com.mobley.apinventory.R;
 import com.mobley.apinventory.activities.MainActivity;
 import com.mobley.apinventory.sql.SqlDataSource;
 
-public class ImportTask extends AsyncTask<Void, Void, Void> {
+public class ImportTask extends AsyncTask<Void, Long, Void> {
     protected static final String TAG = ImportTask.class.getSimpleName();
 
     private Context mContext;
     private SqlDataSource mSqlDataSource;
     private ProgressDialog mProgressDlg;
     private APInventoryApp mApp;
+    private String mCurrentType = "";
 
     public ImportTask(Context context, SqlDataSource src) {
         mContext = context;
@@ -36,7 +37,7 @@ public class ImportTask extends AsyncTask<Void, Void, Void> {
             mProgressDlg.setCancelable(true);
             mProgressDlg.setIndeterminate(true);
             mProgressDlg.setCanceledOnTouchOutside(false);
-            mProgressDlg.setMessage(mApp.getString(R.string.progress_msg));
+            mProgressDlg.setMessage(String.format(mApp.getString(R.string.progress_msg), 0l, mCurrentType));
             mProgressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mProgressDlg.show();
         }
@@ -71,18 +72,36 @@ public class ImportTask extends AsyncTask<Void, Void, Void> {
 
         // TODO: insert some dummy data
         mSqlDataSource.open();
-        mSqlDataSource.insertAssets("12345", "99999", "123", "444");
-        mSqlDataSource.insertAssets("23456", "98988", "123", "444");
-        mSqlDataSource.insertAssets("34567", "66666", "123", "444");
-        mSqlDataSource.insertAssets("45678", "77777", "123", "444");
-        mSqlDataSource.insertAssets("56789", "88888", "123", "444");
-        mSqlDataSource.insertAssets("67890", "98976", "123", "444");
-        for (int i=0; i < 1000; i++) {
+
+        mCurrentType = "Assets";
+        for (long i=0; i < 1000; i++) {
+            mSqlDataSource.insertAssets(String.valueOf(i+1),
+                                        String.valueOf(i+1),
+                                        String.valueOf(i+1),
+                                        String.valueOf(i+1));
+            if ((i%50) == 0) {
+                publishProgress(i);
+            }
+        }
+
+        mCurrentType = "Locations";
+        for (long i=0; i < 1000; i++) {
             mSqlDataSource.insertLocations(String.valueOf(i+1), "Location"+(i+1));
+            if ((i%50) == 0) {
+                publishProgress(i);
+            }
         }
         mSqlDataSource.close();
 
         return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(Long... values) {
+        super.onProgressUpdate(values);
+        if (LogConfig.ON) Log.d(TAG, "onProgressUpdate()");
+
+        mProgressDlg.setMessage(String.format(mApp.getString(R.string.progress_msg), values[0], mCurrentType));
     }
 
     @Override
