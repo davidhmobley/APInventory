@@ -32,8 +32,8 @@
                     android:layout_gravity="center|right"
                     android:text="@string/mainAIN"/>
 
-                <EditText
-                    android:id="@+id/mainAINET"
+                <TextView
+                    android:id="@+id/mainAINTV2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -53,8 +53,8 @@
                     android:layout_gravity="center|right"
                     android:text="@string/mainCIC"/>
 
-                <EditText
-                    android:id="@+id/mainCICET"
+                <TextView
+                    android:id="@+id/mainCICTV2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -74,8 +74,8 @@
                     android:layout_gravity="center|right"
                     android:text="@string/mainCMR"/>
 
-                <EditText
-                    android:id="@+id/mainCMRET"
+                <TextView
+                    android:id="@+id/mainCMRTV2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

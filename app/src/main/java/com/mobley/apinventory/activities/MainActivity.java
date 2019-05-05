@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int REQUEST_READ_WRITE_PERMISSION = 1;
 
     private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumLocationsTV2;
-    private EditText mAinET, mCicET, mCmrET;
+    private TextView mAinTV2, mCicTV2, mCmrTV2;
     private Button mImportButton, mViewAssetsButton, mViewLocationsButton;
 
     private APInventoryApp mApp;
@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNumLocationsTV2 = findViewById(R.id.mainLocationsTV2);
 
         // input widgets
-        mAinET = findViewById(R.id.mainAINET);
-        mCicET = findViewById(R.id.mainCICET);
-        mCmrET = findViewById(R.id.mainCMRET);
+        mAinTV2 = findViewById(R.id.mainAINTV2);
+        mCicTV2 = findViewById(R.id.mainCICTV2);
+        mCmrTV2 = findViewById(R.id.mainCMRTV2);
 
         mImportButton = findViewById(R.id.mainImportButton);
         mImportButton.setOnClickListener(this);
@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSqlDataSource.insertAssets("45678", "77777", "123", "444");
         mSqlDataSource.insertAssets("56789", "88888", "123", "444");
         mSqlDataSource.insertAssets("67890", "98976", "123", "444");
-
         for (int i=0; i < 1000; i++) {
             mSqlDataSource.insertLocations(String.valueOf(i+1), "Location"+(i+1));
         }
@@ -129,9 +128,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         if (LogConfig.ON) Log.d(TAG, "onResume()");
 
-        mAinET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
-        mCicET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
-        mCmrET.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
+        mAinTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
+        mCicTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
+        mCmrTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
 
         checkDBCounts();
     }
