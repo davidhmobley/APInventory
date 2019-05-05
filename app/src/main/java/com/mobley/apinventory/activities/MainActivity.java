@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource;
+    private ImportTask mImportTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (LogConfig.ON) Log.d(TAG, "onPause()");
+
+        if (mImportTask != null) {
+            mImportTask.cancel(true);
+            mImportTask = null; // reset
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (LogConfig.ON) Log.d(TAG, "onResume()");
@@ -207,8 +219,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            ImportTask importTask = new ImportTask(MainActivity.this, mSqlDataSource);
-                            importTask.execute();
+                            mImportTask = new ImportTask(MainActivity.this, mSqlDataSource);
+                            mImportTask.execute();
 
                             dialog.cancel(); // get out!
                         }
