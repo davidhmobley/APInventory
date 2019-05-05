@@ -84,12 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSqlDataSource.insertAssets("45678", "77777", "123", "444");
         mSqlDataSource.insertAssets("56789", "88888", "123", "444");
         mSqlDataSource.insertAssets("67890", "98976", "123", "444");
-        mSqlDataSource.insertLocations("1", "Location1");
-        mSqlDataSource.insertLocations("2", "Location2");
-        mSqlDataSource.insertLocations("3", "Location3");
-        mSqlDataSource.insertLocations("4", "Location4");
-        mSqlDataSource.insertLocations("5", "Location5");
-        mSqlDataSource.insertLocations("6", "Location6");
+
+        for (int i=0; i < 1000; i++) {
+            mSqlDataSource.insertLocations(String.valueOf(i+1), "Location"+(i+1));
+        }
         mSqlDataSource.close();
     }
 
