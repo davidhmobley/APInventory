@@ -73,19 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImportButton.setOnClickListener(this);
 
         verifyPermissions(this);
-
-        // TODO: insert some dummy data
-        mSqlDataSource.open();
-        mSqlDataSource.insertAssets("12345", "99999", "123", "444");
-        mSqlDataSource.insertAssets("23456", "98988", "123", "444");
-        mSqlDataSource.insertAssets("34567", "66666", "123", "444");
-        mSqlDataSource.insertAssets("45678", "77777", "123", "444");
-        mSqlDataSource.insertAssets("56789", "88888", "123", "444");
-        mSqlDataSource.insertAssets("67890", "98976", "123", "444");
-        for (int i=0; i < 1000; i++) {
-            mSqlDataSource.insertLocations(String.valueOf(i+1), "Location"+(i+1));
-        }
-        mSqlDataSource.close();
     }
 
     @Override
@@ -163,9 +150,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (LogConfig.ON) Log.d(TAG, "checkDBCounts()");
 
         mSqlDataSource.open();
-        mNumAssetsTV2.setText(String.valueOf(mSqlDataSource.getNumAssets()));
+        long count = mSqlDataSource.getNumAssets();
+        mNumAssetsTV2.setText(String.valueOf(count));
         mNumLocationsTV2.setText(String.valueOf(mSqlDataSource.getNumLocations()));
         mSqlDataSource.close();
+
+        if (count == 0) {
+            mScanButton.setEnabled(false);
+        } else {
+            mScanButton.setEnabled(true);
+        }
     }
 
     private void verifyPermissions(Activity context) {

@@ -69,6 +69,19 @@ public class ImportTask extends AsyncTask<Void, Void, Void> {
 
         // TODO: parse JSON Assets & Locations
 
+        // TODO: insert some dummy data
+        mSqlDataSource.open();
+        mSqlDataSource.insertAssets("12345", "99999", "123", "444");
+        mSqlDataSource.insertAssets("23456", "98988", "123", "444");
+        mSqlDataSource.insertAssets("34567", "66666", "123", "444");
+        mSqlDataSource.insertAssets("45678", "77777", "123", "444");
+        mSqlDataSource.insertAssets("56789", "88888", "123", "444");
+        mSqlDataSource.insertAssets("67890", "98976", "123", "444");
+        for (int i=0; i < 1000; i++) {
+            mSqlDataSource.insertLocations(String.valueOf(i+1), "Location"+(i+1));
+        }
+        mSqlDataSource.close();
+
         return null;
     }
 
