@@ -1,5 +1,6 @@
 package com.mobley.apinventory.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,9 +24,10 @@ public class ViewLocationsActivity extends AppCompatActivity {
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     private List<Locations> mLocations = null;
-    protected RecyclerView mRecyclerView;
-    protected CustomViewLocationsAdapter mAdapter;
-    protected RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
+    private CustomViewLocationsAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private long mCount = 0; // num locations in db
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,15 @@ public class ViewLocationsActivity extends AppCompatActivity {
         mSqlDataSource = new SqlDataSource(this);
         setContentView(R.layout.activity_view_assets);
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            mCount = intent.getLongExtra("Count", 0);
+        }
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setTitle(getResources().getString(R.string.app_title));
-        actionBar.setSubtitle(getResources().getString(R.string.view_locations_subtitle));
+        actionBar.setSubtitle(String.format(getResources().getString(R.string.view_locations_subtitle), mCount));
         //actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

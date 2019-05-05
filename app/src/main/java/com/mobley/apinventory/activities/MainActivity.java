@@ -207,10 +207,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             confirm.show();
 
         } else if (view == mViewAssetsButton) {
+            mSqlDataSource.open();
+            long count = mSqlDataSource.getNumAssets();
+            mSqlDataSource.close();
+
             Intent intent = new Intent(this, ViewAssetsActivity.class);
+            intent.putExtra("Count", count);
             startActivity(intent);
         } else if (view == mViewLocationsButton) {
+            mSqlDataSource.open();
+            long count = mSqlDataSource.getNumLocations();
+            mSqlDataSource.close();
+
             Intent intent = new Intent(this, ViewLocationsActivity.class);
+            intent.putExtra("Count", count);
             startActivity(intent);
         }
     }
