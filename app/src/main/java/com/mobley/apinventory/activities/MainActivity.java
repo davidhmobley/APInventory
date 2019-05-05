@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumLocationsTV2;
     private TextView mAinTV2, mCicTV2, mCmrTV2;
-    private Button mImportButton, mViewAssetsButton, mViewLocationsButton;
+    private Button mScanButton, mImportButton;
 
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource;
@@ -67,12 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCicTV2 = findViewById(R.id.mainCICTV2);
         mCmrTV2 = findViewById(R.id.mainCMRTV2);
 
+        mScanButton = findViewById(R.id.mainScanButton);
+        mScanButton.setOnClickListener(this);
         mImportButton = findViewById(R.id.mainImportButton);
         mImportButton.setOnClickListener(this);
-        mViewAssetsButton = findViewById(R.id.mainViewAssetsButton);
-        mViewAssetsButton.setOnClickListener(this);
-        mViewLocationsButton = findViewById(R.id.mainViewLocationsButton);
-        mViewLocationsButton.setOnClickListener(this);
 
         verifyPermissions(this);
 
@@ -100,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean bOK = false;
+        long count = 0;
+        Intent intent;
 
         switch(item.getItemId()) {
             case R.id.action_settings:
@@ -107,6 +107,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent preferencesIntent = new Intent(this, SettingsActivity.class);
                 startActivity(preferencesIntent);
+
+                break;
+            case R.id.action_view_assets:
+                bOK = true; // processed
+
+                mSqlDataSource.open();
+                count = mSqlDataSource.getNumAssets();
+                mSqlDataSource.close();
+
+                intent = new Intent(this, ViewAssetsActivity.class);
+                intent.putExtra("Count", count);
+                startActivity(intent);
+
+                break;
+            case R.id.action_view_locations:
+                bOK = true; // processed
+
+                mSqlDataSource.open();
+                count = mSqlDataSource.getNumLocations();
+                mSqlDataSource.close();
+
+                intent = new Intent(this, ViewLocationsActivity.class);
+                intent.putExtra("Count", count);
+                startActivity(intent);
 
                 break;
             case R.id.action_exit:
@@ -175,7 +199,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (LogConfig.ON) Log.d(TAG, "onClick()");
 
-        if (view == mImportButton) {
+        if (view == mScanButton) {
+            // TODO: do something
+        } else if (view == mImportButton) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true)
                     .setTitle(getString(R.string.main_alert_verify_delete))
@@ -202,23 +228,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             AlertDialog confirm = builder.create();
             confirm.show();
-
-        } else if (view == mViewAssetsButton) {
-            mSqlDataSource.open();
-            long count = mSqlDataSource.getNumAssets();
-            mSqlDataSource.close();
-
-            Intent intent = new Intent(this, ViewAssetsActivity.class);
-            intent.putExtra("Count", count);
-            startActivity(intent);
-        } else if (view == mViewLocationsButton) {
-            mSqlDataSource.open();
-            long count = mSqlDataSource.getNumLocations();
-            mSqlDataSource.close();
-
-            Intent intent = new Intent(this, ViewLocationsActivity.class);
-            intent.putExtra("Count", count);
-            startActivity(intent);
         }
     }
 }

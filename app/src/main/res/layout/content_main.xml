@@ -134,44 +134,20 @@
             android:layout_below="@id/mainTableLayout1">
 
             <Button
+                android:id="@+id/mainScanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_button_selector"
+                android:text="@string/main_scan_text"
+                android:textColor="@android:color/white"/>
+
+            <Button
                 android:id="@+id/mainImportButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/text_button_selector"
                 android:text="@string/main_import_text"
-                android:textColor="@android:color/white"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/mainButtonLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_centerInParent="true"
-            android:layout_below="@id/mainButtonLayout1">
-
-            <Button
-                android:id="@+id/mainViewAssetsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/text_button_selector"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:text="@string/main_view_assets_text"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/mainViewLocationsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/text_button_selector"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:text="@string/main_view_locations_text"
                 android:textColor="@android:color/white"/>
 
         </LinearLayout>
