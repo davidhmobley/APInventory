@@ -35,7 +35,7 @@ public class ViewLocationsActivity extends AppCompatActivity {
 
         mApp = (APInventoryApp) getApplication();
         mSqlDataSource = new SqlDataSource(this);
-        setContentView(R.layout.activity_view_assets);
+        setContentView(R.layout.activity_view_locations);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -54,7 +54,7 @@ public class ViewLocationsActivity extends AppCompatActivity {
         mLocations = mSqlDataSource.getAllLocations();
         mSqlDataSource.close();
 
-        mRecyclerView = findViewById(R.id.assetsRecyclerView);
+        mRecyclerView = findViewById(R.id.locationsRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CustomViewLocationsAdapter(mLocations, mApp);

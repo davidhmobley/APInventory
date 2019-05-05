@@ -15,8 +15,8 @@ import com.mobley.apinventory.sql.tables.Locations;
 public class SqlHelper extends SQLiteOpenHelper {
 	protected static final String TAG = SqlHelper.class.getSimpleName();
 	
-	private static final String DATABASE_NAME = "ibext.db";
-	private static final int DATABASE_VERSION = 2;
+	private static final String DATABASE_NAME = "apinv.db";
+	private static final int DATABASE_VERSION = 1;
 
 	public SqlHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
