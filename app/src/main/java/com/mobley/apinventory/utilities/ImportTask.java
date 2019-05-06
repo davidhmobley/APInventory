@@ -37,7 +37,7 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
             mProgressDlg.setCancelable(true);
             mProgressDlg.setIndeterminate(true);
             mProgressDlg.setCanceledOnTouchOutside(false);
-            mProgressDlg.setMessage(String.format(mApp.getString(R.string.progress_msg), 0l, mCurrentType));
+            mProgressDlg.setMessage(String.format(mApp.getString(R.string.progress_msg), mCurrentType, 0l));
             mProgressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mProgressDlg.show();
         }
@@ -101,7 +101,7 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
         super.onProgressUpdate(values);
         if (LogConfig.ON) Log.d(TAG, "onProgressUpdate()");
 
-        mProgressDlg.setMessage(String.format(mApp.getString(R.string.progress_msg), values[0], mCurrentType));
+        mProgressDlg.setMessage(String.format(mApp.getString(R.string.progress_msg), mCurrentType, values[0]));
     }
 
     @Override
