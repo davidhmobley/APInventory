@@ -50,17 +50,17 @@
     <string name="pref_version_title">App Version</string>
     <string name="pref_version_summary">Current App Version</string>
 
-    <string name="pref_category_ain">AIN</string>
+    <string name="pref_category_ain">Agency Identification Number</string>
     <string name="pref_ain_key">AIN</string>
     <string name="pref_ain_title">Your AIN</string>
-    <string name="pref_ain_summary">Agency Id Number</string>
+    <string name="pref_ain_summary">AIN Number</string>
 
-    <string name="pref_category_cic">CIC</string>
+    <string name="pref_category_cic">Customer Identity Code</string>
     <string name="pref_cic_key">CIC</string>
     <string name="pref_cic_title">Your CIC</string>
-    <string name="pref_cic_summary">CIC String</string>
+    <string name="pref_cic_summary">CIC Number</string>
 
-    <string name="pref_category_cmr">CMR</string>
+    <string name="pref_category_cmr">Consolidated Memo of Receipt</string>
     <string name="pref_cmr_key">CMR</string>
     <string name="pref_cmr_title">Your CMR</string>
     <string name="pref_cmr_summary">CMR String</string>
