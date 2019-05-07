@@ -13,7 +13,6 @@ import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -32,7 +31,8 @@ public class SqlDataSource {
 			Assets.ASSETS_COL_NUM,
 			Assets.ASSETS_COL_BCN,
 			Assets.ASSETS_COL_CIC,
-			Assets.ASSETS_COL_CMR
+			Assets.ASSETS_COL_CMR,
+			Assets.ASSETS_COL_DIRTY
 	};
 
 	private String[] allLocationsCols = {
@@ -97,6 +97,7 @@ public class SqlDataSource {
 		values.put(Assets.ASSETS_COL_BCN, bcn);
 		values.put(Assets.ASSETS_COL_CIC, cic);
 		values.put(Assets.ASSETS_COL_CMR, cmr);
+		values.put(Assets.ASSETS_COL_DIRTY, "N");
 
 		// Insert the record
 		mDatabase.insert(Assets.ASSETS_TABLE_NAME, null, values);
@@ -117,6 +118,38 @@ public class SqlDataSource {
 		long count = DatabaseUtils.queryNumEntries(mDatabase, Assets.ASSETS_TABLE_NAME);
 
 		return count;
+	}
+
+	public List<Assets> getAllModifiedAssets() {
+		if (LogConfig.ON) Log.d(TAG, "getAllModifiedAssets()");
+
+		List<Assets> assets = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
+				allAssetsCols,
+				Assets.ASSETS_COL_DIRTY + "=?",
+				new String[] { "Y" },
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				assets.add(new Assets(
+						//c.getInt(0), // id
+						c.getString(1), // assetNum
+						c.getString(2), // barcodeNum
+						c.getString(3), // cic
+						c.getString(4), // cmr
+						c.getString(5))); // dirty
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return assets;
 	}
 
 	public List<Assets> getAllAssets() {
@@ -140,7 +173,8 @@ public class SqlDataSource {
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
 						c.getString(3), // cic
-						c.getString(4))); // cmr
+						c.getString(4), // cmr
+						c.getString(5))); // dirty
 
 				c.moveToNext();
 			}

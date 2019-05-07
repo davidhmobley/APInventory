@@ -25,6 +25,7 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.SqlDataSource;
+import com.mobley.apinventory.utilities.ExportTask;
 import com.mobley.apinventory.utilities.ImportTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource;
     private ImportTask mImportTask = null;
+    private ExportTask mExportTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mImportTask.cancel(true);
             mImportTask = null; // reset
         }
+
+        if (mExportTask != null) {
+            mExportTask.cancel(true);
+            mExportTask = null; // reset
+        }
     }
 
     @Override
@@ -237,7 +244,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AlertDialog confirm = builder.create();
             confirm.show();
         } else if (view == mExportButton) {
-            // TODO: do something else
+            mExportTask = new ExportTask(MainActivity.this, mSqlDataSource);
+            mExportTask.execute();
         }
     }
 }

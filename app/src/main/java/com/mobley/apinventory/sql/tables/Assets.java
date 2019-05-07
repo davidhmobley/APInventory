@@ -10,18 +10,21 @@ public class Assets {
     public static final String ASSETS_COL_BCN = "BarcodeNum";
     public static final String ASSETS_COL_CIC = "CIC";
     public static final String ASSETS_COL_CMR = "CMR";
+    public static final String ASSETS_COL_DIRTY = "Modified";
 
     public long mId;
     public String mAssetNum;
     public String mBarcodeNum;
     public String mCIC;
     public String mCMR;
+    public String mModified; // has this asset been modified?
 
-    public Assets(String assetNum, String barcodeNum, String cic, String cmr) {
+    public Assets(String assetNum, String barcodeNum, String cic, String cmr, String dirty) {
         mAssetNum = assetNum;
         mBarcodeNum = barcodeNum;
         mCIC = cic;
         mCMR = cmr;
+        mModified = dirty;
     }
 
     public String getAssetNum() {
@@ -54,5 +57,13 @@ public class Assets {
 
     public void setCMR(String mCMR) {
         this.mCMR = mCMR;
+    }
+
+    public String getModified() {
+        return mModified;
+    }
+
+    public void setModified(String mModified) {
+        this.mModified = mModified;
     }
 }
