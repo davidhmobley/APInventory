@@ -67,6 +67,9 @@
                 style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_span="2"
+                android:layout_weight="1"
                 android:background="@drawable/text_button_selector"
                 android:text="@string/scan_asset_button_label"
                 android:textColor="@android:color/white"/>
