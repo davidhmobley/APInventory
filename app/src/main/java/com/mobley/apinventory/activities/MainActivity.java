@@ -328,6 +328,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mSqlDataSource.endTransaction();
             mSqlDataSource.close();
 
+            // Start Scanning
+            Intent intent = new Intent(this, ScanActivity.class);
+            startActivity(intent);
+
         } else if (view == mImportButton) {
             mSqlDataSource.open();
             long aCount = mSqlDataSource.getNumAssets();

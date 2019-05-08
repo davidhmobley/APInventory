@@ -34,6 +34,12 @@
     <string name="main_alert_export_title">Export Counts</string>
     <string name="main_alert_export_msg">Number of modified assets: %1$d, Number exported assets: %2$d</string>
 
+    <!-- Scan Activity -->
+    <string name="view_scan_subtitle">Scan</string>
+    <string name="scan_asset_label">Asset:</string>
+    <string name="scan_asset_desc_label">Desc:</string>
+    <string name="scan_asset_button_label">Go!</string>
+
     <!-- View Assets Activity -->
     <string name="view_assets_subtitle">All Assets (%1$d)</string>
     <string name="asset_cic_label">CIC:</string>

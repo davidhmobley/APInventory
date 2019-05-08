@@ -28,6 +28,8 @@
 
         <activity android:name=".activities.ViewAssetsActivity"/>
 
+        <activity android:name=".activities.ScanActivity"/>
+
         <activity android:name=".activities.ViewLocationsActivity"/>
 
         <activity android:name=".activities.SettingsActivity"
