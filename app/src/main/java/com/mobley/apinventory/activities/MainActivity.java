@@ -129,6 +129,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
 
                 break;
+            case R.id.action_delete_assets:
+                bOK = true; // processed
+
+                mSqlDataSource.open();
+                mSqlDataSource.deleteAssets();
+                mSqlDataSource.close();
+
+                checkDBCounts();
+
+                break;
+            case R.id.action_delete_locations:
+                bOK = true; // processed
+
+                mSqlDataSource.open();
+                mSqlDataSource.deleteLocations();
+                mSqlDataSource.close();
+
+                checkDBCounts();
+
+                break;
             case R.id.action_exit:
                 bOK = true; // processed
 
@@ -261,32 +281,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mSqlDataSource.close();
 
         } else if (view == mImportButton) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(true)
-                    .setTitle(getString(R.string.main_alert_verify_delete))
-                    .setMessage(getString(R.string.main_alert_delete_msg))
-                    .setCancelable(false)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            mSqlDataSource.open();
+            long aCount = mSqlDataSource.getNumAssets();
+            long lCount = mSqlDataSource.getNumLocations();
+            mSqlDataSource.close();
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            mImportTask = new ImportTask(MainActivity.this, mSqlDataSource);
-                            mImportTask.execute();
+            if (aCount == 0 && lCount == 0) {
+                mImportTask = new ImportTask(MainActivity.this, mSqlDataSource);
+                mImportTask.execute();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setCancelable(true)
+                        .setTitle(getString(R.string.main_alert_verify_delete))
+                        .setMessage(getString(R.string.main_alert_delete_msg))
+                        .setCancelable(false)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
-                            dialog.cancel(); // get out!
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                mImportTask = new ImportTask(MainActivity.this, mSqlDataSource);
+                                mImportTask.execute();
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel(); // get out!
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
-                            dialog.cancel(); // get out!
-                        }
-                    });
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
 
-            AlertDialog confirm = builder.create();
-            confirm.show();
+                                dialog.cancel(); // get out!
+                            }
+                        });
+
+                AlertDialog confirm = builder.create();
+                confirm.show();
+            }
         } else if (view == mExportButton) {
             mExportTask = new ExportTask(MainActivity.this, mSqlDataSource);
             mExportTask.execute();
