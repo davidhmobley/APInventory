@@ -17,20 +17,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
-public class ExportTask extends AsyncTask<Void, Long, Void> {
+public class ExportTask extends AsyncTask<Void, Long, ExportCounts> {
     protected static final String TAG = ExportTask.class.getSimpleName();
 
     public static final String DIRECTORY = "apinv";
 
     private Context mContext;
     private SqlDataSource mSqlDataSource;
-    private ProgressDialog mProgressDlg;
+    private ProgressDialog mProgressDlg = null;
     private APInventoryApp mApp;
-    private String mCurrentType = "";
+    private ExportCounts mExportCounts = null;
 
     public ExportTask(Context context, SqlDataSource src) {
         mContext = context;
@@ -49,14 +50,14 @@ public class ExportTask extends AsyncTask<Void, Long, Void> {
             mProgressDlg.setCancelable(true);
             mProgressDlg.setIndeterminate(true);
             mProgressDlg.setCanceledOnTouchOutside(false);
-            mProgressDlg.setMessage(String.format(mApp.getString(R.string.export_progress_msg), mCurrentType, 0l));
+            mProgressDlg.setMessage(String.format(mApp.getString(R.string.export_progress_msg), 0l));
             mProgressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mProgressDlg.show();
         }
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected ExportCounts doInBackground(Void... voids) {
         if (LogConfig.ON) Log.d(TAG, "doInBackground()");
 
         long nAssetsExported = 0;
@@ -73,9 +74,8 @@ public class ExportTask extends AsyncTask<Void, Long, Void> {
 
             File file = new File(dir, "genesis.csv");
             try {
-                FileOutputStream fos = new FileOutputStream(file);
-                OutputStreamWriter osw  = new OutputStreamWriter(fos);
-                BufferedWriter writer = new BufferedWriter(osw);
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter writer = new BufferedWriter(fw);
 
                 for (Assets asset : modifiedAssets) {
                     writer.write(asset.getAssetNum());
@@ -93,8 +93,8 @@ public class ExportTask extends AsyncTask<Void, Long, Void> {
                 writer.flush();
                 writer.close();
 
-                fos.flush();
-                fos.close();
+                fw.flush();
+                fw.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Log.i(TAG, "******* File not found. Did you" +
@@ -104,7 +104,9 @@ public class ExportTask extends AsyncTask<Void, Long, Void> {
             }
         }
 
-        return null;
+        mExportCounts = new ExportCounts(modifiedAssets.size(), nAssetsExported);
+
+        return mExportCounts;
     }
 
     @Override
@@ -112,18 +114,18 @@ public class ExportTask extends AsyncTask<Void, Long, Void> {
         super.onProgressUpdate(values);
         if (LogConfig.ON) Log.d(TAG, "onProgressUpdate()");
 
-        mProgressDlg.setMessage(String.format(mApp.getString(R.string.export_progress_msg), mCurrentType, values[0]));
+        mProgressDlg.setMessage(String.format(mApp.getString(R.string.export_progress_msg), values[0]));
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(ExportCounts exportCounts) {
+        super.onPostExecute(exportCounts);
         if (LogConfig.ON) Log.d(TAG, "onPostExecute()");
 
         if (mProgressDlg != null && mProgressDlg.isShowing()) {
             mProgressDlg.dismiss();
         }
 
-        //((MainActivity) mContext).checkDBCounts();
+        ((MainActivity) mContext).showExportCounts(exportCounts);
     }
 }

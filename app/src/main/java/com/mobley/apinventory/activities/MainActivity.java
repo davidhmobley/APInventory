@@ -25,6 +25,7 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.SqlDataSource;
+import com.mobley.apinventory.utilities.ExportCounts;
 import com.mobley.apinventory.utilities.ExportTask;
 import com.mobley.apinventory.utilities.ImportTask;
 
@@ -181,6 +182,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             mScanButton.setEnabled(true);
         }
+    }
+
+    public void showExportCounts(ExportCounts exportCounts) {
+        if (LogConfig.ON) Log.d(TAG, "showExportCounts()");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true)
+                .setTitle(getString(R.string.main_alert_export_title))
+                .setMessage(String.format(getString(R.string.main_alert_export_msg),
+                                            exportCounts.getModifiedAssets(),
+                                            exportCounts.getExportedAssets()))
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel(); // get out!
+                    }
+                });
+
+        AlertDialog confirm = builder.create();
+        confirm.show();
     }
 
     private void verifyPermissions(Activity context) {
