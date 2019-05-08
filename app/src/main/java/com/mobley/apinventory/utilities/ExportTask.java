@@ -83,7 +83,7 @@ public class ExportTask extends AsyncTask<Void, Long, ExportCounts> {
                     writer.write(asset.getCIC());
                     writer.write(",");
                     writer.write(asset.getCMR());
-                    writer.write("/n/r");
+                    writer.newLine();
 
                     nAssetsExported++;
                     if (nAssetsExported%50 == 0) {

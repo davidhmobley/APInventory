@@ -128,7 +128,7 @@ public class SqlDataSource {
 		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
 				allAssetsCols,
 				Assets.ASSETS_COL_DIRTY + "=?",
-				new String[] { "Y" },
+				new String[] { "N" }, // TODO: change back to "Y"
 				null,
 				null,
 				null);
