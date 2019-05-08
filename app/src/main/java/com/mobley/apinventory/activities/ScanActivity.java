@@ -7,10 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.mobley.apinventory.APInventoryApp;
+import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.adapters.CustomViewAssetsAdapter;
 import com.mobley.apinventory.sql.SqlDataSource;
@@ -18,8 +22,10 @@ import com.mobley.apinventory.sql.tables.Assets;
 
 import java.util.List;
 
-public class ScanActivity extends AppCompatActivity {
+public class ScanActivity extends AppCompatActivity implements View.OnClickListener {
     protected static final String TAG = ScanActivity.class.getSimpleName();
+
+    private Button mGoButton;
 
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
@@ -28,6 +34,7 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (LogConfig.ON) Log.d(TAG, "onCreate()");
 
         mApp = (APInventoryApp) getApplication();
         mSqlDataSource = new SqlDataSource(this);
@@ -40,6 +47,9 @@ public class ScanActivity extends AppCompatActivity {
         //actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
+        mGoButton = findViewById(R.id.scanAssetButton);
+        mGoButton.setOnClickListener(this);
     }
 
     @Override
@@ -67,5 +77,14 @@ public class ScanActivity extends AppCompatActivity {
         }
 
         return bOK;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (LogConfig.ON) Log.d(TAG, "onClick()");
+
+        if (view == mGoButton) {
+
+        }
     }
 }

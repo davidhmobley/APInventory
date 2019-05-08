@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mobley.apinventory.APInventoryApp;
+import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.adapters.CustomViewLocationsAdapter;
 import com.mobley.apinventory.sql.SqlDataSource;
@@ -32,6 +34,7 @@ public class ViewLocationsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (LogConfig.ON) Log.d(TAG, "onCreate()");
 
         mApp = (APInventoryApp) getApplication();
         mSqlDataSource = new SqlDataSource(this);
