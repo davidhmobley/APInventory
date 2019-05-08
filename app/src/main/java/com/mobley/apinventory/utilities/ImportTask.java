@@ -80,7 +80,7 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
                                         String.valueOf(i+1),
                                         String.valueOf(i+1),
                                         String.valueOf(i+1));
-            if ((i%50) == 0) {
+            if ((i%100) == 0) {
                 publishProgress(i);
             }
         }

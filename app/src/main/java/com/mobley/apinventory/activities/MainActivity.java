@@ -247,15 +247,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mSqlDataSource.close();
 
             int i = 0;
+            mSqlDataSource.open();
+            mSqlDataSource.beginTransaction();
             for (Assets asset : assets) {
                 if ((i%100) == 0) {
-                    mSqlDataSource.open();
                     mSqlDataSource.setModified(asset);
-                    mSqlDataSource.close();
                 }
 
                 i++;
             }
+            mSqlDataSource.commitTransaction();
+            mSqlDataSource.endTransaction();
+            mSqlDataSource.close();
 
         } else if (view == mImportButton) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
