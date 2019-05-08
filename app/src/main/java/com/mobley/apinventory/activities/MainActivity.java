@@ -132,21 +132,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_delete_assets:
                 bOK = true; // processed
 
-                mSqlDataSource.open();
-                mSqlDataSource.deleteAssets();
-                mSqlDataSource.close();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setCancelable(true)
+                        .setTitle(getString(R.string.main_alert_verify_delete_assets))
+                        .setMessage(getString(R.string.main_alert_delete_msg))
+                        .setCancelable(false)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
-                checkDBCounts();
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                mSqlDataSource.open();
+                                mSqlDataSource.deleteAssets();
+                                mSqlDataSource.close();
+
+                                checkDBCounts();
+
+                                dialog.cancel(); // get out!
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                dialog.cancel(); // get out!
+                            }
+                        });
+
+                AlertDialog confirm = builder.create();
+                confirm.show();
 
                 break;
             case R.id.action_delete_locations:
                 bOK = true; // processed
 
-                mSqlDataSource.open();
-                mSqlDataSource.deleteLocations();
-                mSqlDataSource.close();
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setCancelable(true)
+                        .setTitle(getString(R.string.main_alert_verify_delete_locations))
+                        .setMessage(getString(R.string.main_alert_delete_msg))
+                        .setCancelable(false)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
-                checkDBCounts();
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                mSqlDataSource.open();
+                                mSqlDataSource.deleteLocations();
+                                mSqlDataSource.close();
+
+                                checkDBCounts();
+
+                                dialog.cancel(); // get out!
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                dialog.cancel(); // get out!
+                            }
+                        });
+
+                AlertDialog confirm2 = builder2.create();
+                confirm2.show();
 
                 break;
             case R.id.action_exit:
