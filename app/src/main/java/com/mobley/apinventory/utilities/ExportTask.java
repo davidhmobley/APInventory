@@ -16,10 +16,8 @@ import com.mobley.apinventory.sql.tables.Assets;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.List;
 
 public class ExportTask extends AsyncTask<Void, Long, ExportCounts> {

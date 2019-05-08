@@ -10,7 +10,6 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.tables.Assets;
 
-import java.util.Calendar;
 import java.util.List;
 
 /**
