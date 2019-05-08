@@ -12,6 +12,8 @@ public class APInventoryApp extends Application {
     public static String PREF_AIN_KEY;
     public static String PREF_CIC_KEY;
     public static String PREF_CMR_KEY;
+    public static final String YES = "Y";
+    public static final String NO = "N";
 
     private SharedPreferences mAppPrefs = null;
     private boolean mReadWriteGranted = false;

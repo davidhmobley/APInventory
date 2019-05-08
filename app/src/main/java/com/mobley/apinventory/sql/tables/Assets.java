@@ -19,12 +19,21 @@ public class Assets {
     public String mCMR;
     public String mModified; // has this asset been modified?
 
-    public Assets(String assetNum, String barcodeNum, String cic, String cmr, String dirty) {
+    public Assets(long id, String assetNum, String barcodeNum, String cic, String cmr, String dirty) {
+        mId = id;
         mAssetNum = assetNum;
         mBarcodeNum = barcodeNum;
         mCIC = cic;
         mCMR = cmr;
         mModified = dirty;
+    }
+
+    public long getId() {
+        return mId;
+    }
+
+    public void setId(long mId) {
+        this.mId = mId;
     }
 
     public String getAssetNum() {

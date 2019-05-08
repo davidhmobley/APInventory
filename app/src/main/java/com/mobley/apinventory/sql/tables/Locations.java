@@ -13,9 +13,18 @@ public class Locations {
     public String mLocationNum;
     public String mLocationDesc;
 
-    public Locations(String locationNum, String locationDesc) {
+    public Locations(long id, String locationNum, String locationDesc) {
+        mId = id;
         mLocationNum = locationNum;
         mLocationDesc = locationDesc;
+    }
+
+    public long getId() {
+        return mId;
+    }
+
+    public void setId(long mId) {
+        this.mId = mId;
     }
 
     public String getLocationNum() {

@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
@@ -97,7 +98,7 @@ public class SqlDataSource {
 		values.put(Assets.ASSETS_COL_BCN, bcn);
 		values.put(Assets.ASSETS_COL_CIC, cic);
 		values.put(Assets.ASSETS_COL_CMR, cmr);
-		values.put(Assets.ASSETS_COL_DIRTY, "N");
+		values.put(Assets.ASSETS_COL_DIRTY, APInventoryApp.NO);
 
 		// Insert the record
 		mDatabase.insert(Assets.ASSETS_TABLE_NAME, null, values);
@@ -120,6 +121,22 @@ public class SqlDataSource {
 		return count;
 	}
 
+	public void setModified(Assets asset) {
+		if (LogConfig.ON) Log.d(TAG, "setModified()");
+
+		ContentValues values = new ContentValues();
+		values.put(Assets.ASSETS_COL_DIRTY, APInventoryApp.YES);
+
+		String[] whereArgs = new String[] { String.valueOf(asset.getId()) };
+
+		// Update the record
+		int i = mDatabase.update(Assets.ASSETS_TABLE_NAME,
+						values,
+						Assets.ASSETS_COL_ID + "=?",
+						whereArgs);
+		Log.i(TAG, "***i: " + i);
+	}
+
 	public List<Assets> getAllModifiedAssets() {
 		if (LogConfig.ON) Log.d(TAG, "getAllModifiedAssets()");
 
@@ -128,7 +145,7 @@ public class SqlDataSource {
 		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
 				allAssetsCols,
 				Assets.ASSETS_COL_DIRTY + "=?",
-				new String[] { "Y" },
+				new String[] { APInventoryApp.YES },
 				null,
 				null,
 				null);
@@ -137,7 +154,7 @@ public class SqlDataSource {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
 				assets.add(new Assets(
-						//c.getInt(0), // id
+						c.getInt(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
 						c.getString(3), // cic
@@ -169,7 +186,7 @@ public class SqlDataSource {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
 				assets.add(new Assets(
-						//c.getInt(0), // id
+						c.getInt(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
 						c.getString(3), // cic
@@ -236,7 +253,7 @@ public class SqlDataSource {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
 				locations.add(new Locations(
-						//c.getInt(0), // id
+						c.getInt(0), // id
 						c.getString(1), // locationNum
 						c.getString(2))); // locationDesc
 

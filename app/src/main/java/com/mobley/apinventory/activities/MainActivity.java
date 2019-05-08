@@ -25,9 +25,12 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.SqlDataSource;
+import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.utilities.ExportCounts;
 import com.mobley.apinventory.utilities.ExportTask;
 import com.mobley.apinventory.utilities.ImportTask;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     protected static final String TAG = MainActivity.class.getSimpleName();
@@ -239,6 +242,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (view == mScanButton) {
             // TODO: do something
+            mSqlDataSource.open();
+            List<Assets> assets = mSqlDataSource.getAllAssets();
+            mSqlDataSource.close();
+
+            int i = 0;
+            for (Assets asset : assets) {
+                if ((i%100) == 0) {
+                    mSqlDataSource.open();
+                    mSqlDataSource.setModified(asset);
+                    mSqlDataSource.close();
+                }
+
+                i++;
+            }
+
         } else if (view == mImportButton) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true)
