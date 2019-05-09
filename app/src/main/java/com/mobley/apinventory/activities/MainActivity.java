@@ -30,6 +30,7 @@ import com.mobley.apinventory.utilities.ExportCounts;
 import com.mobley.apinventory.utilities.ExportTask;
 import com.mobley.apinventory.utilities.ImportTask;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -244,8 +245,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mSqlDataSource.open();
         long count = mSqlDataSource.getNumAssets();
-        mNumAssetsTV2.setText(String.valueOf(count));
-        mNumLocationsTV2.setText(String.valueOf(mSqlDataSource.getNumLocations()));
+
+        NumberFormat nf = NumberFormat.getInstance();
+
+        mNumAssetsTV2.setText(String.valueOf(nf.format(count)));
+        mNumLocationsTV2.setText(String.valueOf(nf.format(mSqlDataSource.getNumLocations())));
         mSqlDataSource.close();
 
         if (count == 0) {
