@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -101,6 +102,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(item.getItemId()) {
             case R.id.action_settings:
                 bOK = true; // processed
+
+                SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
+                String ver = null;
+                try {
+                    ver = "v" + getPackageManager().getPackageInfo(getPackageName(),0).versionName;
+                } catch (PackageManager.NameNotFoundException e) {
+                    ver = "???";
+                    e.printStackTrace();
+                }
+                editor.putString(APInventoryApp.PREF_VERSION_KEY, ver);
+                editor.commit();
 
                 Intent preferencesIntent = new Intent(this, SettingsActivity.class);
                 startActivity(preferencesIntent);
