@@ -85,16 +85,20 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
         viewHolder.getAssetCic().setText(mAssets.get(position).getCIC());
         viewHolder.getAssetCmr().setText(mAssets.get(position).getCMR());
 
-         Calendar cal = Calendar.getInstance();
-         cal.setTimeInMillis(mAssets.get(position).getLastInvDate());
-         viewHolder.getAssetLastInvDate().setText(
-             String.format(mApp.getString(R.string.timestamp_str),
-             cal.get(Calendar.MONTH) + 1,
-             cal.get(Calendar.DAY_OF_MONTH),
-             cal.get(Calendar.YEAR),
-             cal.get(Calendar.HOUR_OF_DAY),
-             cal.get(Calendar.MINUTE),
-             cal.get(Calendar.SECOND)));
+        if (mAssets.get(position).getLastInvDate() == 0) {
+            viewHolder.getAssetLastInvDate().setText("");
+        } else {
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(mAssets.get(position).getLastInvDate());
+            viewHolder.getAssetLastInvDate().setText(
+                    String.format(mApp.getString(R.string.timestamp_str),
+                            cal.get(Calendar.MONTH) + 1,
+                            cal.get(Calendar.DAY_OF_MONTH),
+                            cal.get(Calendar.YEAR),
+                            cal.get(Calendar.HOUR_OF_DAY),
+                            cal.get(Calendar.MINUTE),
+                            cal.get(Calendar.SECOND)));
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
