@@ -14,6 +14,7 @@ import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -128,8 +129,12 @@ public class SqlDataSource {
 	public void setModified(Assets asset) {
 		if (LogConfig.ON) Log.d(TAG, "setModified()");
 
+		Calendar cal = Calendar.getInstance();
+
 		ContentValues values = new ContentValues();
 		values.put(Assets.ASSETS_COL_DIRTY, APInventoryApp.YES);
+		values.put(Assets.ASSETS_COL_CHG_DATE, cal.getTimeInMillis());
+		values.put(Assets.ASSETS_COL_LAST_INV_DATE, cal.getTimeInMillis());
 
 		String[] whereArgs = new String[] { String.valueOf(asset.getId()) };
 
