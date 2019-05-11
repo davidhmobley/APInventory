@@ -33,6 +33,8 @@ public class SqlDataSource {
 			Assets.ASSETS_COL_BCN,
 			Assets.ASSETS_COL_CIC,
 			Assets.ASSETS_COL_CMR,
+			Assets.ASSETS_COL_CHG_DATE,
+			Assets.ASSETS_COL_LAST_INV_DATE,
 			Assets.ASSETS_COL_DIRTY
 	};
 
@@ -88,7 +90,7 @@ public class SqlDataSource {
 	/***** ASSETS Functions *****/
 	/*****************************/
 
-	public void insertAssets(String assetNum, String bcn, String cic, String cmr) {
+	public void insertAssets(String assetNum, String bcn, String cic, String cmr, long chgDate, long invDate) {
 		if (LogConfig.ON) Log.d(TAG, "insertAssets()");
 
 		ContentValues values = new ContentValues();
@@ -98,6 +100,8 @@ public class SqlDataSource {
 		values.put(Assets.ASSETS_COL_BCN, bcn);
 		values.put(Assets.ASSETS_COL_CIC, cic);
 		values.put(Assets.ASSETS_COL_CMR, cmr);
+		values.put(Assets.ASSETS_COL_CHG_DATE, chgDate);
+		values.put(Assets.ASSETS_COL_LAST_INV_DATE, invDate);
 		values.put(Assets.ASSETS_COL_DIRTY, APInventoryApp.NO);
 
 		// Insert the record
@@ -154,12 +158,14 @@ public class SqlDataSource {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
 				assets.add(new Assets(
-						c.getInt(0), // id
+						c.getLong(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
 						c.getString(3), // cic
 						c.getString(4), // cmr
-						c.getString(5))); // dirty
+						c.getLong(5), // chg_date
+						c.getLong(6), // last_inv_date
+						c.getString(7))); // dirty
 
 				c.moveToNext();
 			}
@@ -186,12 +192,14 @@ public class SqlDataSource {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
 				assets.add(new Assets(
-						c.getInt(0), // id
+						c.getLong(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
 						c.getString(3), // cic
 						c.getString(4), // cmr
-						c.getString(5))); // dirty
+						c.getLong(5), // chg_date
+						c.getLong(6), // last_inv_date
+						c.getString(7))); // dirty
 
 				c.moveToNext();
 			}
@@ -253,7 +261,7 @@ public class SqlDataSource {
 			c.moveToFirst();
 			while (!c.isAfterLast()) {
 				locations.add(new Locations(
-						c.getInt(0), // id
+						c.getLong(0), // id
 						c.getString(1), // locationNum
 						c.getString(2))); // locationDesc
 

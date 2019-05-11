@@ -16,7 +16,7 @@ public class SqlHelper extends SQLiteOpenHelper {
 	protected static final String TAG = SqlHelper.class.getSimpleName();
 	
 	private static final String DATABASE_NAME = "apinv.db";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 
 	public SqlHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,6 +32,8 @@ public class SqlHelper extends SQLiteOpenHelper {
 					Assets.ASSETS_COL_BCN + " text not null, " +
 					Assets.ASSETS_COL_CIC + " text not null, " +
 					Assets.ASSETS_COL_CMR + " text not null, " +
+					Assets.ASSETS_COL_CHG_DATE + " integer not null, " +
+					Assets.ASSETS_COL_LAST_INV_DATE + " integer not null, " +
 					Assets.ASSETS_COL_DIRTY + " text not null);";
 	private static final String ASSETS_TABLE_DROP = "drop table if exists " + Assets.ASSETS_TABLE_NAME;
 
