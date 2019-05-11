@@ -10,6 +10,7 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.sql.tables.Assets;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView assetNum, barcodeNum, assetCic, assetCmr;
+        private TextView assetNum, barcodeNum, assetCic, assetCmr, assetLastInvDate;
 
         public ViewHolder(View v) {
             super(v);
@@ -33,6 +34,7 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
             barcodeNum = v.findViewById(R.id.assetsBCN);
             assetCic = v.findViewById(R.id.assetsCicValue);
             assetCmr = v.findViewById(R.id.assetsCmrValue);
+            assetLastInvDate = v.findViewById(R.id.assetsLastInvDateValue);
         }
 
         public TextView getAssetNum() {
@@ -49,6 +51,10 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
 
         public TextView getAssetCmr() {
             return assetCmr;
+        }
+
+        public TextView getAssetLastInvDate() {
+            return assetLastInvDate;
         }
     }
 
@@ -75,23 +81,20 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.getAssetNum().setText(mAssets.get(position).getAssetNum());
-
-        /*****
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(mAssets.get(position).getTimestamp());
-        viewHolder.getActionsRowTimestamp().setText(
-                String.format(mApp.getString(R.string.timestamp_str),
-                                cal.get(Calendar.MONTH) + 1,
-                                cal.get(Calendar.DAY_OF_MONTH),
-                                cal.get(Calendar.YEAR),
-                                cal.get(Calendar.HOUR_OF_DAY),
-                                cal.get(Calendar.MINUTE),
-                                cal.get(Calendar.SECOND)));
-         *****/
-
         viewHolder.getBarcodeNum().setText(mAssets.get(position).getBarcodeNum());
         viewHolder.getAssetCic().setText(mAssets.get(position).getCIC());
         viewHolder.getAssetCmr().setText(mAssets.get(position).getCMR());
+
+         Calendar cal = Calendar.getInstance();
+         cal.setTimeInMillis(mAssets.get(position).getLastInvDate());
+         viewHolder.getAssetLastInvDate().setText(
+             String.format(mApp.getString(R.string.timestamp_str),
+             cal.get(Calendar.MONTH) + 1,
+             cal.get(Calendar.DAY_OF_MONTH),
+             cal.get(Calendar.YEAR),
+             cal.get(Calendar.HOUR_OF_DAY),
+             cal.get(Calendar.MINUTE),
+             cal.get(Calendar.SECOND)));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
