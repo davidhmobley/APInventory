@@ -17,6 +17,8 @@ import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.adapters.CustomViewLocationsAdapter;
 import com.mobley.apinventory.adapters.RecyclerTouchListener;
+import com.mobley.apinventory.dialogs.AssetDialog;
+import com.mobley.apinventory.dialogs.LocationDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
@@ -72,7 +74,11 @@ public class ViewLocationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Locations location = mLocations.get(position);
-                Log.i(TAG, "*** you got Location #" + position); // TODO: remove
+
+                LocationDialog dlg = (LocationDialog) LocationDialog.newInstance();
+                dlg.setNum(location.getLocationNum());
+                dlg.setDesc(location.getLocationDesc());
+                dlg.show(getSupportFragmentManager(), "Location");
             }
 
             @Override
