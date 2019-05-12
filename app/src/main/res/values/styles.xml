@@ -6,9 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!--
-        <item name="android:dialogTheme">@style/MyDialogStyle</item>
-        -->
+        <item name="dialogTheme">@style/MyDialogStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -65,7 +63,6 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <!--
     <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="android:windowBackground">@color/bg_color</item>
@@ -90,5 +87,5 @@
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
-    -->
+
 </resources>
