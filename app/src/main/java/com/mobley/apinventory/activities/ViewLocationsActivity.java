@@ -10,12 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.adapters.CustomViewLocationsAdapter;
+import com.mobley.apinventory.adapters.RecyclerTouchListener;
 import com.mobley.apinventory.sql.SqlDataSource;
+import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
 
 import java.util.List;
@@ -65,6 +68,18 @@ public class ViewLocationsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Locations location = mLocations.get(position);
+                Log.i(TAG, "*** you got Location #" + position); // TODO: remove
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     @Override

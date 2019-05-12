@@ -10,11 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.adapters.CustomViewAssetsAdapter;
+import com.mobley.apinventory.adapters.RecyclerTouchListener;
+import com.mobley.apinventory.dialogs.AssetDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
 
@@ -65,6 +68,23 @@ public class ViewAssetsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Assets asset = mAssets.get(position);
+
+                AssetDialog dlg = (AssetDialog) AssetDialog.newInstance();
+                dlg.setNum(asset.getAssetNum());
+                dlg.setCIC(asset.getCIC());
+                dlg.setCMR(asset.getCMR());
+                dlg.show(getSupportFragmentManager(), "Asset");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     @Override
