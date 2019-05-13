@@ -37,6 +37,7 @@ public class ViewAssetsActivity extends AppCompatActivity {
     private CustomViewAssetsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private long mCount = 0; // num assets in db
+    private boolean skipFetchAllAssets = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +53,11 @@ public class ViewAssetsActivity extends AppCompatActivity {
             mCount = intent.getLongExtra("Count", 0);
 
             // Get the intent, verify the action and get the query
+            skipFetchAllAssets = false;
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
                 String query = intent.getStringExtra(SearchManager.QUERY);
                 doMySearch(query);
+                skipFetchAllAssets = true;
             }
         }
 
@@ -66,9 +69,11 @@ public class ViewAssetsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        mSqlDataSource.open();
-        mAssets = mSqlDataSource.getAllAssets();
-        mSqlDataSource.close();
+        if (!skipFetchAllAssets) {
+            mSqlDataSource.open();
+            mAssets = mSqlDataSource.getAllAssets();
+            mSqlDataSource.close();
+        }
 
         mRecyclerView = findViewById(R.id.assetsRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
