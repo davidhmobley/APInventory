@@ -108,6 +108,8 @@ public class ViewAssetsActivity extends AppCompatActivity {
         // Assumes current activity is the searchable activity
         //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         //searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        //searchView.setSubmitButtonEnabled(true);
+        //searchView.setIconifiedByDefault(false)
 
         return true;
     }
