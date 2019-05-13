@@ -26,7 +26,14 @@
 
         <activity android:name=".activities.MainActivity"/>
 
-        <activity android:name=".activities.ViewAssetsActivity"/>
+        <activity android:name=".activities.ViewAssetsActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
 
         <activity android:name=".activities.ScanActivity"/>
 

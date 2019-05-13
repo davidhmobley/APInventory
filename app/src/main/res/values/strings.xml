@@ -9,6 +9,9 @@
     <string name="action_delete_locations">Delete Locations</string>
     <string name="action_exit">Exit</string>
     <string name="action_return">Return</string>
+    <string name="action_search">Search</string>
+
+    <string name="search_hint">Search CMR</string>
 
     <!-- Splash Activity -->
     <string name="splash_company_name">Agency</string>

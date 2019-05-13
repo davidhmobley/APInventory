@@ -1,5 +1,7 @@
 package com.mobley.apinventory.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +49,12 @@ public class ViewAssetsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             mCount = intent.getLongExtra("Count", 0);
+
+            // Get the intent, verify the action and get the query
+            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                doMySearch(query);
+            }
         }
 
         ActionBar actionBar = getSupportActionBar();
@@ -92,6 +101,14 @@ public class ViewAssetsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_assets, menu);
+
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        // Assumes current activity is the searchable activity
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        //searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
         return true;
     }
 
@@ -113,5 +130,10 @@ public class ViewAssetsActivity extends AppCompatActivity {
         }
 
         return bOK;
+    }
+
+    private void doMySearch(String query) {
+        if (LogConfig.ON) Log.d(TAG, "doMySearch(" + query + ")");
+
     }
 }
