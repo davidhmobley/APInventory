@@ -55,6 +55,7 @@
     <string name="asset_dlg_asset_num">AssetNum:</string>
     <string name="asset_dlg_asset_cic">CIC:</string>
     <string name="asset_dlg_asset_cmr">CMR:</string>
+    <string name="asset_dlg_last_inv_date">LastInvDate:</string>
     <string name="asset_dlg_go_button">Go!</string>
 
     <!-- Location Dialog -->

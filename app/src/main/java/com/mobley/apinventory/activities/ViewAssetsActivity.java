@@ -77,6 +77,7 @@ public class ViewAssetsActivity extends AppCompatActivity {
                 dlg.setNum(asset.getAssetNum());
                 dlg.setCIC(asset.getCIC());
                 dlg.setCMR(asset.getCMR());
+                dlg.setLastInvDate(asset.getLastInvDate());
                 dlg.show(getSupportFragmentManager(), "Asset");
             }
 

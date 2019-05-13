@@ -64,12 +64,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/assetsRowLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/assetsLastInvDateLabel"
                 style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="@string/asset_last_inv_date_label"/>
 
             <TextView

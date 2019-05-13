@@ -16,15 +16,18 @@ import android.widget.TextView;
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.R;
 
+import java.util.Calendar;
+
 public class AssetDialog extends AppCompatDialogFragment implements View.OnClickListener {
     protected static final String TAG = AssetDialog.class.getSimpleName();
 
     private APInventoryApp mApp;
-    private TextView mAssetNum, mAssetCIC, mAssetCMR;
+    private TextView mAssetNum, mAssetCIC, mAssetCMR, mAssetLastInvDate;
     private Button mGoButton;
     public String mNum;
     public String mCIC;
     public String mCMR;
+    public long mLastInvDate;
 
     public static AppCompatDialogFragment newInstance() {
         AppCompatDialogFragment dialogFragment = new AssetDialog();
@@ -57,11 +60,28 @@ public class AssetDialog extends AppCompatDialogFragment implements View.OnClick
         mAssetNum = view.findViewById(R.id.assetDlgAssetNum);
         mAssetCIC = view.findViewById(R.id.assetDlgAssetCIC);
         mAssetCMR = view.findViewById(R.id.assetDlgAssetCMR);
+        mAssetLastInvDate = view.findViewById(R.id.assetDlgLastInvDate);
 
         // values
         mAssetNum.setText(mNum);
         mAssetCIC.setText(mCIC);
         mAssetCMR.setText(mCMR);
+
+        // special case for Last Inventory Date
+        if (mLastInvDate == 0) {
+            mAssetLastInvDate.setText("");
+        } else {
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(mLastInvDate);
+            mAssetLastInvDate.setText(
+                    String.format(mApp.getString(R.string.timestamp_str),
+                            cal.get(Calendar.MONTH) + 1,
+                            cal.get(Calendar.DAY_OF_MONTH),
+                            cal.get(Calendar.YEAR),
+                            cal.get(Calendar.HOUR_OF_DAY),
+                            cal.get(Calendar.MINUTE),
+                            cal.get(Calendar.SECOND)));
+        }
 
         mGoButton = view.findViewById(R.id.assetDlgGoButton);
         mGoButton.setOnClickListener(this);
@@ -91,5 +111,9 @@ public class AssetDialog extends AppCompatDialogFragment implements View.OnClick
 
     public void setCMR(String mCMR) {
         this.mCMR = mCMR;
+    }
+
+    public void setLastInvDate(long mLastInvDate) {
+        this.mLastInvDate = mLastInvDate;
     }
 }
