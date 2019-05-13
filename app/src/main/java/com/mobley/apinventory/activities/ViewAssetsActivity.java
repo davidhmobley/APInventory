@@ -139,5 +139,10 @@ public class ViewAssetsActivity extends AppCompatActivity {
     private void doMySearch(String query) {
         if (LogConfig.ON) Log.d(TAG, "doMySearch(" + query + ")");
 
+        mSqlDataSource.open();
+        mAssets = mSqlDataSource.getAssetNum(query);
+        mSqlDataSource.close();
+
+        Log.i(TAG, "**** mAssets.size(): " + mAssets.size());
     }
 }
