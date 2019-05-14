@@ -112,13 +112,17 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
                 List<Assets> assets = mSqlDataSource.getAssetNum(mScanAssetET.getText().toString());
                 mSqlDataSource.close();
 
-                // TODO: check for > 1 records
-
-                mScanAssetDescTV2.setText(assets.get(0).getDescription());
-                // mark this record as "scanned"
-                mSqlDataSource.open();
-                mSqlDataSource.setModified(assets.get(0));
-                mSqlDataSource.close();
+                if (assets.size() == 0) {
+                    mApp.mySnackbar(view, "no match", true);
+                } else if (assets.size() > 1) {
+                    mApp.mySnackbar(view, "too many matches", true);
+                } else { // exactly one!
+                    mScanAssetDescTV2.setText(assets.get(0).getDescription());
+                    // mark this record as "scanned"
+                    mSqlDataSource.open();
+                    mSqlDataSource.setModified(assets.get(0));
+                    mSqlDataSource.close();
+                }
             }
         }
     }
