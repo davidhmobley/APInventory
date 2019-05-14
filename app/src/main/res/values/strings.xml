@@ -4,6 +4,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_view_assets">View Assets</string>
+    <string name="action_view_scanned_assets">View Scanned Assets</string>
     <string name="action_view_locations">View Locations</string>
     <string name="action_delete_assets">Delete Assets</string>
     <string name="action_delete_locations">Delete Locations</string>
@@ -46,6 +47,7 @@
 
     <!-- View Assets Activity -->
     <string name="view_assets_subtitle">All Assets (%1$s)</string>
+    <string name="view_scanned_assets_subtitle">Scanned Assets (%1$s)</string>
     <string name="asset_cic_label">CIC:</string>
     <string name="asset_cmr_label">CMR:</string>
     <string name="asset_last_inv_date_label">LastInvDate:</string>

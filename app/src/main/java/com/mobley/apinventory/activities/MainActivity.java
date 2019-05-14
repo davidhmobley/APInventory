@@ -119,6 +119,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bOK = true; // processed
 
                 intent = new Intent(this, ViewAssetsActivity.class);
+                intent.putExtra(ViewAssetsActivity.SHOW_WHAT, ViewAssetsActivity.ALL_ASSETS);
+                startActivity(intent);
+
+                break;
+            case R.id.action_view_scanned_assets:
+                bOK = true; // processed
+
+                intent = new Intent(this, ViewAssetsActivity.class);
+                intent.putExtra(ViewAssetsActivity.SHOW_WHAT, ViewAssetsActivity.ALL_SCANNED_ASSETS);
                 startActivity(intent);
 
                 break;

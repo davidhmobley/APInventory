@@ -31,6 +31,10 @@ import java.util.List;
 public class ViewAssetsActivity extends AppCompatActivity {
     protected static final String TAG = ViewAssetsActivity.class.getSimpleName();
 
+    public static final String SHOW_WHAT = "ShowWhat";
+    public static final int ALL_ASSETS = 0;
+    public static final int ALL_SCANNED_ASSETS = 1;
+
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     private List<Assets> mAssets = null;
@@ -38,6 +42,7 @@ public class ViewAssetsActivity extends AppCompatActivity {
     private CustomViewAssetsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private boolean skipFetchAllAssets = false;
+    private int mShowWhat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class ViewAssetsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
+            // what Assets am i showing this time?
+            mShowWhat = intent.getIntExtra(SHOW_WHAT, ALL_ASSETS);
+
             // Get the intent, verify the action and get the query
             skipFetchAllAssets = false;
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -61,7 +69,13 @@ public class ViewAssetsActivity extends AppCompatActivity {
 
         if (!skipFetchAllAssets) {
             mSqlDataSource.open();
-            mAssets = mSqlDataSource.getAllAssets();
+
+            if (mShowWhat == ALL_ASSETS) {
+                mAssets = mSqlDataSource.getAllAssets();
+            } else {
+                mAssets = mSqlDataSource.getAllModifiedAssets();
+            }
+
             mSqlDataSource.close();
         }
 
@@ -70,8 +84,14 @@ public class ViewAssetsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setTitle(getResources().getString(R.string.app_title));
-        actionBar.setSubtitle(String.format(getResources().getString(R.string.view_assets_subtitle),
-                nf.format(mAssets.size())));
+
+        if (mShowWhat == ALL_ASSETS) {
+            actionBar.setSubtitle(String.format(getResources().getString(R.string.view_assets_subtitle),
+                    nf.format(mAssets.size())));
+        } else {
+            actionBar.setSubtitle(String.format(getResources().getString(R.string.view_scanned_assets_subtitle),
+                    nf.format(mAssets.size())));
+        }
         //actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);

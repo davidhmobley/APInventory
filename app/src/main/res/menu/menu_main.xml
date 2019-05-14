@@ -15,8 +15,13 @@
         android:title="@string/action_view_assets"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_view_locations"
+        android:id="@+id/action_view_scanned_assets"
         android:orderInCategory="111"
+        android:title="@string/action_view_scanned_assets"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_view_locations"
+        android:orderInCategory="112"
         android:title="@string/action_view_locations"
         app:showAsAction="never" />
 
