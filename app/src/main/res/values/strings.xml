@@ -26,6 +26,7 @@
     <string name="mainCIC">CIC:</string>
     <string name="mainCMR">CMR:</string>
     <string name="mainAssets">Num Assets:</string>
+    <string name="mainScannedAssets">Scanned Assets:</string>
     <string name="mainLocations">Num Locations:</string>
     <string name="main_scan_text">Scan</string>
     <string name="main_import_text">Import</string>

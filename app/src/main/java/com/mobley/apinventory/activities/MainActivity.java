@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final int REQUEST_READ_WRITE_PERMISSION = 1;
 
-    private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumLocationsTV2;
+    private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumScannedAssetsTV2, mNumLocationsTV2;
     private TextView mAinTV2, mCicTV2, mCmrTV2;
     private Button mScanButton, mImportButton, mExportButton;
 
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCicTV = findViewById(R.id.mainCICTV);
         mCmrTV = findViewById(R.id.mainCMRTV);
         mNumAssetsTV2 = findViewById(R.id.mainAssetsTV2);
+        mNumScannedAssetsTV2 = findViewById(R.id.mainScannedAssetsTV2);
         mNumLocationsTV2 = findViewById(R.id.mainLocationsTV2);
 
         // input widgets
@@ -257,6 +258,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NumberFormat nf = NumberFormat.getInstance();
 
         mNumAssetsTV2.setText(String.valueOf(nf.format(count)));
+        mNumScannedAssetsTV2.setText(String.valueOf(nf.format(mSqlDataSource.getNumScannedAssets())));
         mNumLocationsTV2.setText(String.valueOf(nf.format(mSqlDataSource.getNumLocations())));
         mSqlDataSource.close();
 

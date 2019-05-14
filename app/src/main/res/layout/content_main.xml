@@ -117,6 +117,28 @@
                 android:layout_marginTop="5dp">
 
                 <TextView
+                    android:id="@+id/mainScannedAssetsTV"
+                    style="@style/My_Bold_TextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:text="@string/mainScannedAssets"/>
+
+                <TextView
+                    android:id="@+id/mainScannedAssetsTV2"
+                    style="@style/My_Normal_TextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
                     android:id="@+id/mainLocationsTV"
                     style="@style/My_Bold_TextAppearance"
                     android:layout_width="wrap_content"

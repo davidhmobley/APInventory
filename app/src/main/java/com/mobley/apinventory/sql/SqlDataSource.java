@@ -126,6 +126,17 @@ public class SqlDataSource {
 		return count;
 	}
 
+	public long getNumScannedAssets() {
+		if (LogConfig.ON) Log.d(TAG, "getNumScannedAssets()");
+
+		long count = DatabaseUtils.queryNumEntries(mDatabase,
+												   Assets.ASSETS_TABLE_NAME,
+												   Assets.ASSETS_COL_DIRTY + "=?",
+												   new String[] { APInventoryApp.YES });
+
+		return count;
+	}
+
 	public void setModified(Assets asset) {
 		if (LogConfig.ON) Log.d(TAG, "setModified()");
 
