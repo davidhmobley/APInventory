@@ -324,25 +324,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (LogConfig.ON) Log.d(TAG, "onClick()");
 
         if (view == mScanButton) {
-            // TODO: do something
-            mSqlDataSource.open();
-            List<Assets> assets = mSqlDataSource.getAllAssets();
-            mSqlDataSource.close();
-
-            int i = 0;
-            mSqlDataSource.open();
-            mSqlDataSource.beginTransaction();
-            for (Assets asset : assets) {
-                if ((i%100) == 0) {
-                    mSqlDataSource.setModified(asset);
-                }
-
-                i++;
-            }
-            mSqlDataSource.commitTransaction();
-            mSqlDataSource.endTransaction();
-            mSqlDataSource.close();
-
             // Start Scanning
             Intent intent = new Intent(this, ScanActivity.class);
             startActivity(intent);
