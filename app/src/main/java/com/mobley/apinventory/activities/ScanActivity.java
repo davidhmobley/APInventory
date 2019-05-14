@@ -1,17 +1,21 @@
 package com.mobley.apinventory.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
@@ -30,6 +34,8 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     private List<Assets> mAssets = null;
+    private TextView mScanAssetTV, mScanAssetDescTV2;
+    private EditText mScanAssetET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,9 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
+        mScanAssetTV = findViewById(R.id.scanAssetTV);
+        mScanAssetET = findViewById(R.id.scanAssetET);
+        mScanAssetDescTV2 = findViewById(R.id.scanAssetDescTV2);
         mGoButton = findViewById(R.id.scanAssetButton);
         mGoButton.setOnClickListener(this);
     }
@@ -83,8 +92,30 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (LogConfig.ON) Log.d(TAG, "onClick()");
 
-        if (view == mGoButton) {
+        boolean bGood = true;
 
+        if (view == mGoButton) {
+            if (TextUtils.isEmpty(mScanAssetET.getText())) {
+                bGood = false;
+                mScanAssetTV.setTextColor(Color.RED);
+                mScanAssetET.requestFocus();
+            } else {
+                mScanAssetTV.setTextColor(Color.BLACK);
+            }
+
+            if (bGood) {
+                mSqlDataSource.open();
+                List<Assets> assets = mSqlDataSource.getAssetNum(mScanAssetET.getText().toString());
+                mSqlDataSource.close();
+
+                // TODO: check for > 1 records
+
+                mScanAssetDescTV2.setText(assets.get(0).getDescription());
+                // mark this record as "scanned"
+                mSqlDataSource.open();
+                mSqlDataSource.setModified(assets.get(0));
+                mSqlDataSource.close();
+            }
         }
     }
 }

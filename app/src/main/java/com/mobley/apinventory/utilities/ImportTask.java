@@ -78,6 +78,7 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
         for (long i=0; i < 10000; i++) {
             mSqlDataSource.insertAssets(String.valueOf(i+1),
                                         String.valueOf(i+1),
+                                        "Desc" + (i+1),
                                         String.valueOf(i+1),
                                         String.valueOf(i+1),
                                         0l,

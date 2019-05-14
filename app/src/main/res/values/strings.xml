@@ -59,6 +59,7 @@
     <!-- Asset Dialog -->
     <string name="asset_dlg_title">Asset</string>
     <string name="asset_dlg_asset_num">AssetNum:</string>
+    <string name="asset_dlg_asset_desc">Description:</string>
     <string name="asset_dlg_asset_cic">CIC:</string>
     <string name="asset_dlg_asset_cmr">CMR:</string>
     <string name="asset_dlg_last_inv_date">LastInvDate:</string>

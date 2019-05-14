@@ -78,6 +78,8 @@ public class ExportTask extends AsyncTask<Void, Long, ExportCounts> {
                 for (Assets asset : modifiedAssets) {
                     writer.write(asset.getAssetNum());
                     writer.write(",");
+                    writer.write(asset.getDescription());
+                    writer.write(",");
                     writer.write(asset.getCIC());
                     writer.write(",");
                     writer.write(asset.getCMR());

@@ -32,6 +32,7 @@ public class SqlDataSource {
 			Assets.ASSETS_COL_ID,
 			Assets.ASSETS_COL_NUM,
 			Assets.ASSETS_COL_BCN,
+			Assets.ASSETS_COL_DESCRIPTION,
 			Assets.ASSETS_COL_CIC,
 			Assets.ASSETS_COL_CMR,
 			Assets.ASSETS_COL_CHG_DATE,
@@ -91,7 +92,13 @@ public class SqlDataSource {
 	/***** ASSETS Functions *****/
 	/*****************************/
 
-	public void insertAssets(String assetNum, String bcn, String cic, String cmr, long chgDate, long invDate) {
+	public void insertAssets(String assetNum,
+							 String bcn,
+							 String desc,
+							 String cic,
+							 String cmr,
+							 long chgDate,
+							 long invDate) {
 		if (LogConfig.ON) Log.d(TAG, "insertAssets()");
 
 		ContentValues values = new ContentValues();
@@ -99,6 +106,7 @@ public class SqlDataSource {
 		//values.put(Account.ACCT_COL_ID, acct.getId());
 		values.put(Assets.ASSETS_COL_NUM, assetNum);
 		values.put(Assets.ASSETS_COL_BCN, bcn);
+		values.put(Assets.ASSETS_COL_DESCRIPTION, desc);
 		values.put(Assets.ASSETS_COL_CIC, cic);
 		values.put(Assets.ASSETS_COL_CMR, cmr);
 		values.put(Assets.ASSETS_COL_CHG_DATE, chgDate);
@@ -177,11 +185,12 @@ public class SqlDataSource {
 						c.getLong(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
-						c.getString(3), // cic
-						c.getString(4), // cmr
-						c.getLong(5), // chg_date
-						c.getLong(6), // last_inv_date
-						c.getString(7))); // dirty
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
 
 				c.moveToNext();
 			}
@@ -211,11 +220,12 @@ public class SqlDataSource {
 						c.getLong(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
-						c.getString(3), // cic
-						c.getString(4), // cmr
-						c.getLong(5), // chg_date
-						c.getLong(6), // last_inv_date
-						c.getString(7))); // dirty
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
 
 				c.moveToNext();
 			}
@@ -245,11 +255,12 @@ public class SqlDataSource {
 						c.getLong(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
-						c.getString(3), // cic
-						c.getString(4), // cmr
-						c.getLong(5), // chg_date
-						c.getLong(6), // last_inv_date
-						c.getString(7))); // dirty
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
 
 				c.moveToNext();
 			}
@@ -279,11 +290,12 @@ public class SqlDataSource {
 						c.getLong(0), // id
 						c.getString(1), // assetNum
 						c.getString(2), // barcodeNum
-						c.getString(3), // cic
-						c.getString(4), // cmr
-						c.getLong(5), // chg_date
-						c.getLong(6), // last_inv_date
-						c.getString(7))); // dirty
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
 
 				c.moveToNext();
 			}

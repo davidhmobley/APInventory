@@ -110,6 +110,7 @@ public class ViewAssetsActivity extends AppCompatActivity {
 
                 AssetDialog dlg = (AssetDialog) AssetDialog.newInstance();
                 dlg.setNum(asset.getAssetNum());
+                dlg.setDesc(asset.getDescription());
                 dlg.setCIC(asset.getCIC());
                 dlg.setCMR(asset.getCMR());
                 dlg.setLastInvDate(asset.getLastInvDate());

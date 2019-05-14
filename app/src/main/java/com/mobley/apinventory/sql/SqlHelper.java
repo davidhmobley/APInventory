@@ -16,7 +16,7 @@ public class SqlHelper extends SQLiteOpenHelper {
 	protected static final String TAG = SqlHelper.class.getSimpleName();
 	
 	private static final String DATABASE_NAME = "apinv.db";
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 4;
 
 	public SqlHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,6 +30,7 @@ public class SqlHelper extends SQLiteOpenHelper {
 					Assets.ASSETS_COL_ID + " integer primary key autoincrement, " +
 					Assets.ASSETS_COL_NUM + " text not null, " +
 					Assets.ASSETS_COL_BCN + " text not null, " +
+					Assets.ASSETS_COL_DESCRIPTION + " text not null, " +
 					Assets.ASSETS_COL_CIC + " text not null, " +
 					Assets.ASSETS_COL_CMR + " text not null, " +
 					Assets.ASSETS_COL_CHG_DATE + " integer not null, " +

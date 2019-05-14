@@ -22,9 +22,10 @@ public class AssetDialog extends AppCompatDialogFragment implements View.OnClick
     protected static final String TAG = AssetDialog.class.getSimpleName();
 
     private APInventoryApp mApp;
-    private TextView mAssetNum, mAssetCIC, mAssetCMR, mAssetLastInvDate;
+    private TextView mAssetNum, mAssetDesc, mAssetCIC, mAssetCMR, mAssetLastInvDate;
     private Button mGoButton;
     public String mNum;
+    public String mDesc;
     public String mCIC;
     public String mCMR;
     public long mLastInvDate;
@@ -58,12 +59,14 @@ public class AssetDialog extends AppCompatDialogFragment implements View.OnClick
         View view = inflater.inflate(R.layout.dialog_asset, null);
 
         mAssetNum = view.findViewById(R.id.assetDlgAssetNum);
+        mAssetDesc = view.findViewById(R.id.assetDlgAssetDesc);
         mAssetCIC = view.findViewById(R.id.assetDlgAssetCIC);
         mAssetCMR = view.findViewById(R.id.assetDlgAssetCMR);
         mAssetLastInvDate = view.findViewById(R.id.assetDlgLastInvDate);
 
         // values
         mAssetNum.setText(mNum);
+        mAssetDesc.setText(mDesc);
         mAssetCIC.setText(mCIC);
         mAssetCMR.setText(mCMR);
 
@@ -103,6 +106,10 @@ public class AssetDialog extends AppCompatDialogFragment implements View.OnClick
 
     public void setNum(String mNum) {
         this.mNum = mNum;
+    }
+
+    public void setDesc(String mDesc) {
+        this.mDesc = mDesc;
     }
 
     public void setCIC(String mCIC) {

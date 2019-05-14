@@ -49,14 +49,13 @@
                 android:layout_gravity="center|right"
                 android:text="@string/scan_asset_desc_label"/>
 
-            <EditText
-                android:id="@+id/scanAssetDescET"
+            <TextView
+                android:id="@+id/scanAssetDescTV2"
                 style="@style/My_Normal_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:inputType="text"/>
+                android:layout_weight="1"/>
 
         </TableRow>
 

@@ -8,6 +8,7 @@ public class Assets {
     public static final String ASSETS_COL_ID = "_id";
     public static final String ASSETS_COL_NUM = "AssetNum";
     public static final String ASSETS_COL_BCN = "BarcodeNum";
+    public static final String ASSETS_COL_DESCRIPTION = "Desc";
     public static final String ASSETS_COL_CIC = "CIC";
     public static final String ASSETS_COL_CMR = "CMR";
     public static final String ASSETS_COL_CHG_DATE = "ChangeDate";
@@ -17,6 +18,7 @@ public class Assets {
     public long mId;
     public String mAssetNum;
     public String mBarcodeNum;
+    public String mDescription;
     public String mCIC;
     public String mCMR;
     public long mChgDate;
@@ -26,6 +28,7 @@ public class Assets {
     public Assets(long id,
                   String assetNum,
                   String barcodeNum,
+                  String description,
                   String cic,
                   String cmr,
                   long chgDate,
@@ -34,6 +37,7 @@ public class Assets {
         mId = id;
         mAssetNum = assetNum;
         mBarcodeNum = barcodeNum;
+        mDescription = description;
         mCIC = cic;
         mCMR = cmr;
         mChgDate = chgDate;
@@ -63,6 +67,14 @@ public class Assets {
 
     public void setBarcodeNum(String mBarcodeNum) {
         this.mBarcodeNum = mBarcodeNum;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String mDescription) {
+        this.mDescription = mDescription;
     }
 
     public String getCIC() {

@@ -26,12 +26,12 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView assetNum, barcodeNum, assetCic, assetCmr, assetLastInvDate;
+        private TextView assetNum, assetDesc, assetCic, assetCmr, assetLastInvDate;
 
         public ViewHolder(View v) {
             super(v);
             assetNum = v.findViewById(R.id.assetsNum);
-            barcodeNum = v.findViewById(R.id.assetsBCN);
+            assetDesc = v.findViewById(R.id.assetsDesc);
             assetCic = v.findViewById(R.id.assetsCicValue);
             assetCmr = v.findViewById(R.id.assetsCmrValue);
             assetLastInvDate = v.findViewById(R.id.assetsLastInvDateValue);
@@ -41,8 +41,8 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
             return assetNum;
         }
 
-        public TextView getBarcodeNum() {
-            return barcodeNum;
+        public TextView getDesc() {
+            return assetDesc;
         }
 
         public TextView getAssetCic() {
@@ -81,7 +81,7 @@ public class CustomViewAssetsAdapter extends RecyclerView.Adapter<CustomViewAsse
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.getAssetNum().setText(mAssets.get(position).getAssetNum());
-        viewHolder.getBarcodeNum().setText(mAssets.get(position).getBarcodeNum());
+        viewHolder.getDesc().setText(mAssets.get(position).getDescription());
         viewHolder.getAssetCic().setText(mAssets.get(position).getCIC());
         viewHolder.getAssetCmr().setText(mAssets.get(position).getCMR());
 
