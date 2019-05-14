@@ -58,6 +58,7 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
 
         mScanAssetTV = findViewById(R.id.scanAssetTV);
         mScanAssetET = findViewById(R.id.scanAssetET);
+        mScanAssetET.requestFocus();
         mScanAssetDescTV2 = findViewById(R.id.scanAssetDescTV2);
         mGoButton = findViewById(R.id.scanAssetButton);
         mGoButton.setOnClickListener(this);
