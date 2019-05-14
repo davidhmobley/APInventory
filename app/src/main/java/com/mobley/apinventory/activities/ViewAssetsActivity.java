@@ -42,7 +42,7 @@ public class ViewAssetsActivity extends AppCompatActivity {
     private CustomViewAssetsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private boolean skipFetchAllAssets = false;
-    private int mShowWhat;
+    private int mShowWhat; // All or Scanned Assets
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
