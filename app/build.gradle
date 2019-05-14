@@ -7,7 +7,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.03"
+        versionName "1.04"
         setProperty("archivesBaseName", "APInventory-v" + versionName)
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
