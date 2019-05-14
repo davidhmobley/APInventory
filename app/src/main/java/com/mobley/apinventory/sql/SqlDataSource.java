@@ -191,6 +191,40 @@ public class SqlDataSource {
 		return assets; // probably just one!
 	}
 
+	public List<Assets> getScannedAssetNum(String assetNum) {
+		if (LogConfig.ON) Log.d(TAG, "getScannedAssetNum(" + assetNum + ")");
+
+		List<Assets> assets = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
+				allAssetsCols,
+				Assets.ASSETS_COL_NUM + "=? and " + Assets.ASSETS_COL_DIRTY + "=?",
+				new String[] { assetNum, APInventoryApp.YES },
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				assets.add(new Assets(
+						c.getLong(0), // id
+						c.getString(1), // assetNum
+						c.getString(2), // barcodeNum
+						c.getString(3), // cic
+						c.getString(4), // cmr
+						c.getLong(5), // chg_date
+						c.getLong(6), // last_inv_date
+						c.getString(7))); // dirty
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return assets; // probably just one!
+	}
+
 	public List<Assets> getAllModifiedAssets() {
 		if (LogConfig.ON) Log.d(TAG, "getAllModifiedAssets()");
 

@@ -166,7 +166,13 @@ public class ViewAssetsActivity extends AppCompatActivity {
         if (LogConfig.ON) Log.d(TAG, "doMySearch(" + query + ")");
 
         mSqlDataSource.open();
-        mAssets = mSqlDataSource.getAssetNum(query);
+
+        if (mShowWhat == ALL_ASSETS) {
+            mAssets = mSqlDataSource.getAssetNum(query);
+        } else if (mShowWhat == ALL_SCANNED_ASSETS) {
+            mAssets = mSqlDataSource.getScannedAssetNum(query);
+        }
+
         mSqlDataSource.close();
     }
 }
