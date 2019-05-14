@@ -17,6 +17,7 @@ public class APInventoryApp extends Application {
 
     private SharedPreferences mAppPrefs = null;
     private boolean mReadWriteGranted = false;
+    private int mViewAssetType; // All or Scanned
 
     @Override
     public void onCreate() {
@@ -72,5 +73,13 @@ public class APInventoryApp extends Application {
 
     public void setReadWriteGranted(boolean rw) {
         mReadWriteGranted = rw;
+    }
+
+    public int getViewAssetType() {
+        return mViewAssetType;
+    }
+
+    public void setViewAssetType(int mViewAssetType) {
+        this.mViewAssetType = mViewAssetType;
     }
 }

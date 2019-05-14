@@ -50,14 +50,13 @@ public class ViewAssetsActivity extends AppCompatActivity {
         if (LogConfig.ON) Log.d(TAG, "onCreate()");
 
         mApp = (APInventoryApp) getApplication();
+        mShowWhat = mApp.getViewAssetType();
+
         mSqlDataSource = new SqlDataSource(this);
         setContentView(R.layout.activity_view_assets);
 
         Intent intent = getIntent();
         if (intent != null) {
-            // what Assets am i showing this time?
-            mShowWhat = intent.getIntExtra(SHOW_WHAT, ALL_ASSETS);
-
             // Get the intent, verify the action and get the query
             skipFetchAllAssets = false;
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -160,6 +159,14 @@ public class ViewAssetsActivity extends AppCompatActivity {
         }
 
         return bOK;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (LogConfig.ON) Log.d(TAG, "onPause()");
+
+        mApp.setViewAssetType(mShowWhat); // save away...
     }
 
     private void doMySearch(String query) {
