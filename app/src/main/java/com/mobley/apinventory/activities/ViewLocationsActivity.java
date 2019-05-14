@@ -23,6 +23,7 @@ import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ViewLocationsActivity extends AppCompatActivity {
@@ -34,7 +35,6 @@ public class ViewLocationsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private CustomViewLocationsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private long mCount = 0; // num locations in db
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +45,20 @@ public class ViewLocationsActivity extends AppCompatActivity {
         mSqlDataSource = new SqlDataSource(this);
         setContentView(R.layout.activity_view_locations);
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            mCount = intent.getLongExtra("Count", 0);
-        }
+        mSqlDataSource.open();
+        mLocations = mSqlDataSource.getAllLocations();
+        mSqlDataSource.close();
+
+        NumberFormat nf = NumberFormat.getInstance();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setTitle(getResources().getString(R.string.app_title));
-        actionBar.setSubtitle(String.format(getResources().getString(R.string.view_locations_subtitle), mCount));
+        actionBar.setSubtitle(String.format(getResources().getString(R.string.view_locations_subtitle),
+                nf.format(mLocations.size())));
         //actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-
-        mSqlDataSource.open();
-        mLocations = mSqlDataSource.getAllLocations();
-        mSqlDataSource.close();
 
         mRecyclerView = findViewById(R.id.locationsRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);

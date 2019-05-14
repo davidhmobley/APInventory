@@ -118,24 +118,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_view_assets:
                 bOK = true; // processed
 
-                mSqlDataSource.open();
-                count = mSqlDataSource.getNumAssets();
-                mSqlDataSource.close();
-
                 intent = new Intent(this, ViewAssetsActivity.class);
-                intent.putExtra("Count", count);
                 startActivity(intent);
 
                 break;
             case R.id.action_view_locations:
                 bOK = true; // processed
 
-                mSqlDataSource.open();
-                count = mSqlDataSource.getNumLocations();
-                mSqlDataSource.close();
-
                 intent = new Intent(this, ViewLocationsActivity.class);
-                intent.putExtra("Count", count);
                 startActivity(intent);
 
                 break;

@@ -25,6 +25,7 @@ import com.mobley.apinventory.dialogs.AssetDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ViewAssetsActivity extends AppCompatActivity {
@@ -36,7 +37,6 @@ public class ViewAssetsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private CustomViewAssetsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private long mCount = 0; // num assets in db
     private boolean skipFetchAllAssets = false;
 
     @Override
@@ -50,8 +50,6 @@ public class ViewAssetsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            mCount = intent.getLongExtra("Count", 0);
-
             // Get the intent, verify the action and get the query
             skipFetchAllAssets = false;
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -61,19 +59,22 @@ public class ViewAssetsActivity extends AppCompatActivity {
             }
         }
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setIcon(R.mipmap.ic_launcher);
-        actionBar.setTitle(getResources().getString(R.string.app_title));
-        actionBar.setSubtitle(String.format(getResources().getString(R.string.view_assets_subtitle), mCount));
-        //actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
         if (!skipFetchAllAssets) {
             mSqlDataSource.open();
             mAssets = mSqlDataSource.getAllAssets();
             mSqlDataSource.close();
         }
+
+        NumberFormat nf = NumberFormat.getInstance();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setIcon(R.mipmap.ic_launcher);
+        actionBar.setTitle(getResources().getString(R.string.app_title));
+        actionBar.setSubtitle(String.format(getResources().getString(R.string.view_assets_subtitle),
+                nf.format(mAssets.size())));
+        //actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         mRecyclerView = findViewById(R.id.assetsRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
@@ -147,7 +148,5 @@ public class ViewAssetsActivity extends AppCompatActivity {
         mSqlDataSource.open();
         mAssets = mSqlDataSource.getAssetNum(query);
         mSqlDataSource.close();
-
-        Log.i(TAG, "**** mAssets.size(): " + mAssets.size());
     }
 }
