@@ -75,6 +75,13 @@ public class ExportTask extends AsyncTask<Void, Long, ExportCounts> {
                 FileWriter fw = new FileWriter(file);
                 BufferedWriter writer = new BufferedWriter(fw);
 
+                // headers
+                writer.write("AssetNum,");
+                writer.write("AssetDesc,");
+                writer.write("AssetCIC,");
+                writer.write("AssetCMR,");
+                writer.newLine();
+
                 for (Assets asset : modifiedAssets) {
                     writer.write(asset.getAssetNum());
                     writer.write(",");

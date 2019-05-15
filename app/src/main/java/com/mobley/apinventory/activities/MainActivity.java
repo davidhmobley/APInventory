@@ -273,6 +273,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void showExportCounts(ExportCounts exportCounts) {
         if (LogConfig.ON) Log.d(TAG, "showExportCounts()");
 
+        /***
+        mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
+                "Error!!!!",
+                true);
+        ***/
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true)
                 .setTitle(getString(R.string.main_alert_export_title))
