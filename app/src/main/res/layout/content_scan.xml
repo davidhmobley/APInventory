@@ -42,7 +42,6 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/scanAssetDescTV"
                 style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,6 +50,48 @@
 
             <TextView
                 android:id="@+id/scanAssetDescTV2"
+                style="@style/My_Normal_TextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/My_Bold_TextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:text="@string/scan_asset_cic_label"/>
+
+            <TextView
+                android:id="@+id/scanAssetCicTV2"
+                style="@style/My_Normal_TextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/My_Bold_TextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:text="@string/scan_asset_cmr_label"/>
+
+            <TextView
+                android:id="@+id/scanAssetCmrTV2"
                 style="@style/My_Normal_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -44,6 +44,8 @@
     <string name="view_scan_subtitle">Scan</string>
     <string name="scan_asset_label">Asset:</string>
     <string name="scan_asset_desc_label">Desc:</string>
+    <string name="scan_asset_cic_label">CIC:</string>
+    <string name="scan_asset_cmr_label">CMR:</string>
     <string name="scan_asset_button_label">Go!</string>
 
     <!-- View Assets Activity -->

@@ -35,8 +35,8 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
 
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
-    private List<Assets> mAssets = null;
-    private TextView mScanAssetTV, mScanAssetDescTV2;
+    //private List<Assets> mAssets = null;
+    private TextView mScanAssetTV, mScanAssetDescTV2, mScanAssetCicTV2, mScanAssetCmrTV2;
     private EditText mScanAssetET;
 
     @Override
@@ -60,6 +60,8 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
         mScanAssetET = findViewById(R.id.scanAssetET);
         mScanAssetET.requestFocus();
         mScanAssetDescTV2 = findViewById(R.id.scanAssetDescTV2);
+        mScanAssetCicTV2 = findViewById(R.id.scanAssetCicTV2);
+        mScanAssetCmrTV2 = findViewById(R.id.scanAssetCmrTV2);
         mGoButton = findViewById(R.id.scanAssetButton);
         mGoButton.setOnClickListener(this);
     }
@@ -119,6 +121,9 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
                     mApp.mySnackbar(view, "too many matches", true);
                 } else { // exactly one!
                     mScanAssetDescTV2.setText(assets.get(0).getDescription());
+                    mScanAssetCicTV2.setText(assets.get(0).getCIC());
+                    mScanAssetCmrTV2.setText(assets.get(0).getCMR());
+
                     // mark this record as "scanned"
                     mSqlDataSource.open();
                     mSqlDataSource.setModified(assets.get(0));
