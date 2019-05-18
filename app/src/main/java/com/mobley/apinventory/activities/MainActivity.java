@@ -268,6 +268,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             mScanButton.setEnabled(true);
         }
+
+         mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
+         getString(R.string.main_import_complete_msg),
+         true);
     }
 
     public void showExportCounts(ExportCounts exportCounts) {

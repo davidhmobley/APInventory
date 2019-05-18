@@ -32,6 +32,7 @@
     <string name="main_scan_text">Scan</string>
     <string name="main_import_text">Import</string>
     <string name="main_export_text">Export</string>
+    <string name="main_import_complete_msg">Import Complete</string>
     <string name="main_alert_verify_delete">Delete All Data?</string>
     <string name="main_alert_verify_delete_assets">Delete All Assets?</string>
     <string name="main_alert_verify_delete_locations">Delete All Locations?</string>
