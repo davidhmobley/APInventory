@@ -38,7 +38,7 @@
     <string name="main_alert_verify_delete_locations">Delete All Locations?</string>
     <string name="main_alert_delete_msg">Are you sure?</string>
     <string name="main_alert_export_title">Export Counts</string>
-    <string name="main_alert_export_msg">Number of modified assets: %1$d, Number exported assets: %2$d</string>
+    <string name="main_alert_export_msg">Number of modified assets: %1$d\nNumber exported assets: %2$d</string>
 
     <!-- Scan Activity -->
     <string name="view_scan_subtitle">Scan</string>
