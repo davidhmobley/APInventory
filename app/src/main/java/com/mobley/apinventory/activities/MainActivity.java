@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 mSqlDataSource.deleteAssets();
                                 mSqlDataSource.close();
 
-                                checkDBCounts();
+                                checkDBCounts(false);
 
                                 dialog.cancel(); // get out!
                             }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 mSqlDataSource.deleteLocations();
                                 mSqlDataSource.close();
 
-                                checkDBCounts();
+                                checkDBCounts(false);
 
                                 dialog.cancel(); // get out!
                             }
@@ -247,10 +247,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCicTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
         mCmrTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
 
-        checkDBCounts();
+        checkDBCounts(false);
     }
 
-    public void checkDBCounts() {
+    public void checkDBCounts(boolean bImportComplete) {
         if (LogConfig.ON) Log.d(TAG, "checkDBCounts()");
 
         mSqlDataSource.open();
@@ -269,9 +269,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mScanButton.setEnabled(true);
         }
 
-         mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
-         getString(R.string.main_import_complete_msg),
-         true);
+        if (bImportComplete) {
+            mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
+                    getString(R.string.main_import_complete_msg),
+                    true);
+        }
     }
 
     public void showExportCounts(ExportCounts exportCounts) {
