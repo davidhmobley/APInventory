@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(ts);
             mMainImportTimestampTV.setText(
-                    String.format(mApp.getString(R.string.timestamp_str),
+                    String.format(mApp.getString(R.string.timestamp_str2),
                             cal.get(Calendar.MONTH) + 1,
                             cal.get(Calendar.DAY_OF_MONTH),
                             cal.get(Calendar.YEAR),

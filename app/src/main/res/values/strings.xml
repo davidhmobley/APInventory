@@ -29,7 +29,7 @@
     <string name="mainAssets">Num Assets:</string>
     <string name="mainScannedAssets">Scanned Assets:</string>
     <string name="mainLocations">Num Locations:</string>
-    <string name="mainImportTimestamp">Import Timestamp:</string>
+    <string name="mainImportTimestamp">Imported At:</string>
     <string name="main_scan_text">Scan</string>
     <string name="main_import_text">Import</string>
     <string name="main_export_text">Export</string>
@@ -57,6 +57,7 @@
     <string name="asset_cmr_label">CMR:</string>
     <string name="asset_last_inv_date_label">LastInvDate:</string>
     <string name="timestamp_str">%1$d/%2$d/%3$d %4$d:%5$02d.%6$02d</string>
+    <string name="timestamp_str2">%1$d/%2$d/%3$d\n%4$d:%5$02d.%6$02d</string>
 
     <!-- View Locations Activity -->
     <string name="view_locations_subtitle">All Locations (%1$s)</string>
