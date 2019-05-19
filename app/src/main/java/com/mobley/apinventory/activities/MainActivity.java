@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 mSqlDataSource.deleteAssets();
                                 mSqlDataSource.close();
 
-                                checkDBCounts(false);
+                                checkDBCounts(false, true);
 
                                 dialog.cancel(); // get out!
                             }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 mSqlDataSource.deleteLocations();
                                 mSqlDataSource.close();
 
-                                checkDBCounts(false);
+                                checkDBCounts(false, true);
 
                                 dialog.cancel(); // get out!
                             }
@@ -247,10 +247,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCicTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
         mCmrTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
 
-        checkDBCounts(false);
+        checkDBCounts(false, false);
     }
 
-    public void checkDBCounts(boolean bImportComplete) {
+    public void checkDBCounts(boolean bImportComplete, boolean bDeleteComplete) {
         if (LogConfig.ON) Log.d(TAG, "checkDBCounts()");
 
         mSqlDataSource.open();
@@ -272,6 +272,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (bImportComplete) {
             mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
                     getString(R.string.main_import_complete_msg),
+                    true);
+        } else if (bDeleteComplete) {
+            mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
+                    getString(R.string.main_delete_complete_msg),
                     true);
         }
     }

@@ -120,6 +120,6 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
             mProgressDlg.dismiss();
         }
 
-        ((MainActivity) mContext).checkDBCounts(true);
+        ((MainActivity) mContext).checkDBCounts(true, false);
     }
 }
