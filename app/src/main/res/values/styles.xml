@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="dialogTheme">@style/MyDialogStyle</item>
+        <item name="android:buttonStyle">@style/MyBorderlessButtonStyle</item>
+        <item name="android:alertDialogTheme">@style/MyAlertDialogTheme</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -63,6 +65,85 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <!-- ******************************* -->
+    <!-- ********* ALERTDIALOG ********* -->
+    <!-- ******************************* -->
+    <style name="MyAlertDialogTheme"> <!-- parent="@android:style/Theme.Holo.Light.Dialog" -->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:borderlessButtonStyle">@android:style/Widget.Holo.Light.Button.Borderless.Small</item>
+        <item name="android:buttonBarStyle">@style/MyAlertDialogButtonBarStyle</item>
+        <item name="android:buttonBarButtonStyle">@style/MyAlertDialogButtonBarButtonStyle</item>
+        <item name="android:textAppearance">@style/MyAlertDialogTextAppearance</item>
+        <item name="android:textAppearanceInverse">@style/MyAlertDialogTextAppearance</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowBackground">@color/bg_color</item>
+        <item name="android:windowAnimationStyle">@style/MyDialogAnimations</item>
+        <!--
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:listPreferredItemPaddingLeft">16dip</item>
+        <item name="android:listPreferredItemPaddingRight">16dip</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@style/MyAlertDialogTitleStyle</item>
+        -->
+    </style>
+
+    <style name="MyAlertDialogStyle"> <!-- parent="@android:style/Theme.Holo.Light.Dialog" -->
+        <item name="android:fullDark">@color/yellow</item>
+        <item name="android:topDark">@color/alert_dialog_title_bg_color</item>
+        <item name="android:centerDark">@color/alert_dialog_title_bg_color</item>
+        <item name="android:bottomDark">@color/yellow</item>
+        <item name="android:fullBright">@color/yellow</item>
+        <item name="android:topBright">@color/yellow</item>
+        <item name="android:centerBright">@color/yellow</item>
+        <item name="android:bottomBright">@color/alert_dialog_bg_color</item>
+        <item name="android:bottomMedium">@color/yellow</item>
+        <item name="android:centerMedium">@color/yellow</item>
+    </style>
+
+    <style name="MyAlertDialogTitleStyle">
+        <item name="android:textAppearance">@style/MyAlertDialogTitleTextAppearance</item>
+    </style>
+
+    <style name="MyAlertDialogTitleTextAppearance">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">@color/alert_dialog_title_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyAlertDialogTextAppearance">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/alert_dialog_text_color</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="MyAlertDialogButtonBarStyle"> <!-- @android:style/Holo.Light.ButtonBar.AlertDialog -->
+        <item name="android:divider">@drawable/alertdialog_divider</item>
+        <item name="android:dividerPadding">10dp</item>
+        <item name="android:showDividers">beginning|middle|end</item>
+        <item name="android:background">@color/alert_dialog_bg_color</item>
+        <item name="android:paddingBottom">5dp</item>
+        <!--
+        <item name="android:paddingTop">@dimen/margin25</item>
+        <item name="android:paddingLeft">@dimen/margin25</item>
+        <item name="android:paddingRight">@dimen/margin25</item>
+        -->
+    </style>
+
+    <style name="MyAlertDialogButtonBarButtonStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:background">@drawable/text_button_selector</item>
+    </style>
+
+
+    <!-- ************************** -->
+    <!-- ********* DIALOG ********* -->
+    <!-- ************************** -->
     <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="android:windowBackground">@color/bg_color</item>

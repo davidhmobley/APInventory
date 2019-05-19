@@ -169,7 +169,6 @@
                 android:id="@+id/mainScanButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_button_selector"
                 android:text="@string/main_scan_text"
                 android:textColor="@android:color/white"/>
 
@@ -188,7 +187,6 @@
                 android:id="@+id/mainImportButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_button_selector"
                 android:text="@string/main_import_text"
                 android:textColor="@android:color/white"/>
 
@@ -197,7 +195,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/text_button_selector"
                 android:text="@string/main_export_text"
                 android:textColor="@android:color/white"/>
 
