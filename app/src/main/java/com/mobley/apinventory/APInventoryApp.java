@@ -13,12 +13,14 @@ import android.widget.TextView;
 public class APInventoryApp extends Application {
     protected static final String TAG = APInventoryApp.class.getSimpleName();
 
+    public static final String YES = "Y";
+    public static final String NO = "N";
+
     public static String PREF_VERSION_KEY;
     public static String PREF_AIN_KEY;
     public static String PREF_CIC_KEY;
     public static String PREF_CMR_KEY;
-    public static final String YES = "Y";
-    public static final String NO = "N";
+    public static String PREF_IMPORT_TIMESTAMP_KEY;
 
     private SharedPreferences mAppPrefs = null;
     private boolean mReadWriteGranted = false;
@@ -64,6 +66,14 @@ public class APInventoryApp extends Application {
         if (!mAppPrefs.contains(PREF_CMR_KEY)) {
             SharedPreferences.Editor editor = mAppPrefs.edit();
             editor.putString(PREF_CMR_KEY, getString(R.string.default_cmr));
+            editor.commit();
+        }
+
+        // timestamp of import
+        PREF_IMPORT_TIMESTAMP_KEY = getResources().getString(R.string.pref_import_timestamp_key);
+        if (!mAppPrefs.contains(PREF_IMPORT_TIMESTAMP_KEY)) {
+            SharedPreferences.Editor editor = mAppPrefs.edit();
+            editor.putLong(PREF_IMPORT_TIMESTAMP_KEY, 0l);
             editor.commit();
         }
     }

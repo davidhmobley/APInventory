@@ -28,6 +28,7 @@ import com.mobley.apinventory.utilities.ExportTask;
 import com.mobley.apinventory.utilities.ImportTask;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final int REQUEST_READ_WRITE_PERMISSION = 1;
 
-    private TextView mAinTV, mCicTV, mCmrTV, mNumAssetsTV2, mNumScannedAssetsTV2, mNumLocationsTV2;
-    private TextView mAinTV2, mCicTV2, mCmrTV2;
+    private TextView mNumAssetsTV2, mNumScannedAssetsTV2, mNumLocationsTV2;
+    private TextView mAinTV2, mCicTV2, mCmrTV2, mMainImportTimestampTV;
     private Button mScanButton, mImportButton, mExportButton;
 
     private APInventoryApp mApp;
@@ -61,17 +62,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
-        mAinTV = findViewById(R.id.mainAINTV);
-        mCicTV = findViewById(R.id.mainCICTV);
-        mCmrTV = findViewById(R.id.mainCMRTV);
-        mNumAssetsTV2 = findViewById(R.id.mainAssetsTV2);
-        mNumScannedAssetsTV2 = findViewById(R.id.mainScannedAssetsTV2);
-        mNumLocationsTV2 = findViewById(R.id.mainLocationsTV2);
-
-        // input widgets
         mAinTV2 = findViewById(R.id.mainAINTV2);
         mCicTV2 = findViewById(R.id.mainCICTV2);
         mCmrTV2 = findViewById(R.id.mainCMRTV2);
+        mNumAssetsTV2 = findViewById(R.id.mainAssetsTV2);
+        mNumScannedAssetsTV2 = findViewById(R.id.mainScannedAssetsTV2);
+        mNumLocationsTV2 = findViewById(R.id.mainLocationsTV2);
+        mMainImportTimestampTV = findViewById(R.id.mainImportTimestampTV);
 
         mScanButton = findViewById(R.id.mainScanButton);
         mScanButton.setOnClickListener(this);
@@ -254,20 +251,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (LogConfig.ON) Log.d(TAG, "checkDBCounts()");
 
         mSqlDataSource.open();
-        long count = mSqlDataSource.getNumAssets();
+        long countAssets = mSqlDataSource.getNumAssets();
+        long countLocations = mSqlDataSource.getNumLocations();
 
         NumberFormat nf = NumberFormat.getInstance();
 
-        mNumAssetsTV2.setText(String.valueOf(nf.format(count)));
+        mNumAssetsTV2.setText(String.valueOf(nf.format(countAssets)));
         mNumScannedAssetsTV2.setText(String.valueOf(nf.format(mSqlDataSource.getNumScannedAssets())));
-        mNumLocationsTV2.setText(String.valueOf(nf.format(mSqlDataSource.getNumLocations())));
+        mNumLocationsTV2.setText(String.valueOf(nf.format(countLocations)));
         mSqlDataSource.close();
 
-        if (count == 0) {
+        setImportTimestamp();
+
+        if (countAssets == 0l || countLocations == 0l) {
             mScanButton.setEnabled(false);
+
+            // reset import timestamp
+            SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
+            editor.putLong(APInventoryApp.PREF_IMPORT_TIMESTAMP_KEY, 0l);
+            editor.commit();
+
         } else {
             mScanButton.setEnabled(true);
         }
+
+        setImportTimestamp();
 
         if (bImportComplete) {
             mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
@@ -277,6 +285,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
                     getString(R.string.main_delete_complete_msg),
                     true);
+        }
+    }
+
+    private void setImportTimestamp() {
+        if (LogConfig.ON) Log.d(TAG, "setImportTimestamp()");
+
+        if (mApp.getAppPrefs().getLong(APInventoryApp.PREF_IMPORT_TIMESTAMP_KEY, 0l) == 0l) {
+            mMainImportTimestampTV.setText("");
+        } else {
+            long ts = mApp.getAppPrefs().getLong(APInventoryApp.PREF_IMPORT_TIMESTAMP_KEY, 0l);
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(ts);
+            mMainImportTimestampTV.setText(
+                    String.format(mApp.getString(R.string.timestamp_str),
+                            cal.get(Calendar.MONTH) + 1,
+                            cal.get(Calendar.DAY_OF_MONTH),
+                            cal.get(Calendar.YEAR),
+                            cal.get(Calendar.HOUR_OF_DAY),
+                            cal.get(Calendar.MINUTE),
+                            cal.get(Calendar.SECOND)));
         }
     }
 

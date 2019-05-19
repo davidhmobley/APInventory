@@ -2,6 +2,7 @@ package com.mobley.apinventory.utilities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,6 +11,8 @@ import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.activities.MainActivity;
 import com.mobley.apinventory.sql.SqlDataSource;
+
+import java.util.Calendar;
 
 public class ImportTask extends AsyncTask<Void, Long, Void> {
     protected static final String TAG = ImportTask.class.getSimpleName();
@@ -25,6 +28,11 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
         mSqlDataSource = src;
 
         mApp = (APInventoryApp) mContext.getApplicationContext();
+
+        Calendar cal = Calendar.getInstance();
+        SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
+        editor.putLong(APInventoryApp.PREF_IMPORT_TIMESTAMP_KEY, cal.getTimeInMillis());
+        editor.commit();
     }
 
     @Override

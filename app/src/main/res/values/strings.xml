@@ -29,6 +29,7 @@
     <string name="mainAssets">Num Assets:</string>
     <string name="mainScannedAssets">Scanned Assets:</string>
     <string name="mainLocations">Num Locations:</string>
+    <string name="mainImportTimestamp">Import Timestamp:</string>
     <string name="main_scan_text">Scan</string>
     <string name="main_import_text">Import</string>
     <string name="main_export_text">Export</string>
@@ -103,5 +104,7 @@
     <string name="pref_cmr_key">CMR</string>
     <string name="pref_cmr_title">Your CMR</string>
     <string name="pref_cmr_summary">CMR String</string>
+
+    <string name="pref_import_timestamp_key">ImportTimestamp</string>
 
 </resources>
