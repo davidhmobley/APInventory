@@ -22,31 +22,11 @@ public class SearchTask extends AsyncTask<String, Long, Void> {
 
     private Context mContext;
     private SqlDataSource mSqlDataSource;
-    private ProgressDialog mProgressDlg;
-    private APInventoryApp mApp;
     private List<Locations> mLocationList = null;
 
     public SearchTask(Context context, SqlDataSource src) {
         mContext = context;
         mSqlDataSource = src;
-
-        mApp = (APInventoryApp) mContext.getApplicationContext();
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        if (LogConfig.ON) Log.d(TAG, "onPreExecute()");
-
-        if (mProgressDlg == null || !mProgressDlg.isShowing()) {
-            mProgressDlg = new ProgressDialog(mContext);
-            mProgressDlg.setCancelable(true);
-            mProgressDlg.setIndeterminate(true);
-            mProgressDlg.setCanceledOnTouchOutside(false);
-            mProgressDlg.setMessage("Please wait");
-            mProgressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgressDlg.show();
-        }
     }
 
     @Override
@@ -64,10 +44,6 @@ public class SearchTask extends AsyncTask<String, Long, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         if (LogConfig.ON) Log.d(TAG, "onPostExecute()");
-
-        if (mProgressDlg != null && mProgressDlg.isShowing()) {
-            mProgressDlg.dismiss();
-        }
 
         ((ViewLocationsActivityTest) mContext).setLocations(mLocationList);
     }
