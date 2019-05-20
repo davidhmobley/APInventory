@@ -368,4 +368,33 @@ public class SqlDataSource {
 
 		return locations;
 	}
+
+	public List<Locations> getLocationsByDesc(String startsWith) {
+		if (LogConfig.ON) Log.d(TAG, "getLocationsByDesc(" + startsWith + ")");
+
+		List<Locations> locations = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Locations.LOCATIONS_TABLE_NAME,
+				allLocationsCols,
+				Locations.LOCATIONS_COL_DESC + " like ?",
+				new String[] { startsWith+"%" },
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				locations.add(new Locations(
+						c.getLong(0), // id
+						c.getString(1), // locationNum
+						c.getString(2))); // locationDesc
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return locations;
+	}
 }

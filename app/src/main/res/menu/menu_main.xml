@@ -24,6 +24,11 @@
         android:orderInCategory="112"
         android:title="@string/action_view_locations"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_view_locationstest"
+        android:orderInCategory="113"
+        android:title="@string/action_view_locationstest"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_delete_assets"
