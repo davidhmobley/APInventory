@@ -35,9 +35,9 @@ public class ViewLocationsActivityTest extends AppCompatActivity {
     private List<Locations> mLocations = null;
     private AppCompatAutoCompleteTextView mAutoCompleteTV;
     private CharSequence mCharSeq;
-    //private RecyclerView mRecyclerView;
-    //private CustomViewLocationsAdapter mAdapter;
-    //private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
+    private CustomViewLocationsAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,7 @@ public class ViewLocationsActivityTest extends AppCompatActivity {
 
         });
 
-        /******
-        mRecyclerView = findViewById(R.id.locationsRecyclerView);
+        mRecyclerView = findViewById(R.id.autocompleteRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CustomViewLocationsAdapter(mLocations, mApp);
@@ -108,7 +107,6 @@ public class ViewLocationsActivityTest extends AppCompatActivity {
 
             }
         }));
-         *******/
     }
 
     @Override
@@ -136,5 +134,14 @@ public class ViewLocationsActivityTest extends AppCompatActivity {
         }
 
         return bOK;
+    }
+
+    public void setLocations(List<Locations> locations) {
+        if (LogConfig.ON) Log.d(TAG, "setLocations()");
+
+        mLocations = locations;
+
+        mAdapter = new CustomViewLocationsAdapter(mLocations, mApp);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

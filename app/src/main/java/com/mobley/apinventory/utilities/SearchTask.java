@@ -10,6 +10,7 @@ import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.activities.MainActivity;
+import com.mobley.apinventory.activities.ViewLocationsActivityTest;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Locations;
 
@@ -23,7 +24,7 @@ public class SearchTask extends AsyncTask<String, Long, Void> {
     private SqlDataSource mSqlDataSource;
     private ProgressDialog mProgressDlg;
     private APInventoryApp mApp;
-    private String mCurrentType = "";
+    private List<Locations> mLocationList = null;
 
     public SearchTask(Context context, SqlDataSource src) {
         mContext = context;
@@ -53,7 +54,7 @@ public class SearchTask extends AsyncTask<String, Long, Void> {
         if (LogConfig.ON) Log.d(TAG, "doInBackground()");
 
         mSqlDataSource.open();
-        List<Locations> locations = mSqlDataSource.getLocationsByDesc(args[0]);
+        mLocationList = mSqlDataSource.getLocationsByDesc(args[0]);
         mSqlDataSource.close();
 
         return null;
@@ -67,5 +68,7 @@ public class SearchTask extends AsyncTask<String, Long, Void> {
         if (mProgressDlg != null && mProgressDlg.isShowing()) {
             mProgressDlg.dismiss();
         }
+
+        ((ViewLocationsActivityTest) mContext).setLocations(mLocationList);
     }
 }
