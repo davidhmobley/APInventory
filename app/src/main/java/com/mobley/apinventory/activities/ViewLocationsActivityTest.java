@@ -64,6 +64,7 @@ public class ViewLocationsActivityTest extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
 
         mAutoCompleteTV = findViewById(R.id.autocompleteTV);
+        mAutoCompleteTV.requestFocus();
         mAutoCompleteTV.addTextChangedListener(new TextWatcher() {
 
             @Override
