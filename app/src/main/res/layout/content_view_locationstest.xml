@@ -9,10 +9,14 @@
     tools:context=".activities.ViewLocationsActivityTest"
     tools:showIn="@layout/activity_view_locationstest">
 
+    <!--
     <android.support.v7.widget.AppCompatAutoCompleteTextView
+    -->
+    <EditText
         android:id="@+id/autocompleteTV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:inputType="text"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/autocompleteRecyclerView"

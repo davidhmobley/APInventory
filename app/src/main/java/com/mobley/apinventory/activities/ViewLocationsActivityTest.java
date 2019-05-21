@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
@@ -33,7 +34,8 @@ public class ViewLocationsActivityTest extends AppCompatActivity {
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     private List<Locations> mLocations = null;
-    private AppCompatAutoCompleteTextView mAutoCompleteTV;
+    //private AppCompatAutoCompleteTextView mAutoCompleteTV;
+    private EditText mAutoCompleteTV;
     private CharSequence mCharSeq;
     private RecyclerView mRecyclerView;
     private CustomViewLocationsAdapter mAdapter;
