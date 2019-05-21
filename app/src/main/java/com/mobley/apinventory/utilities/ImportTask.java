@@ -99,7 +99,7 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
         mCurrentType = "Locations";
         for (long i=0; i < 10000; i++) {
             mSqlDataSource.insertLocations(String.valueOf(i+1), "Location"+(i+1));
-            if ((i%50) == 0) {
+            if ((i%100) == 0) {
                 publishProgress(i);
             }
         }
