@@ -20,6 +20,7 @@ public class APInventoryApp extends Application {
     public static String PREF_AIN_KEY;
     public static String PREF_CIC_KEY;
     public static String PREF_CMR_KEY;
+    public static String PREF_LOCATION_KEY;
     public static String PREF_IMPORT_TIMESTAMP_KEY;
 
     private SharedPreferences mAppPrefs = null;
@@ -66,6 +67,13 @@ public class APInventoryApp extends Application {
         if (!mAppPrefs.contains(PREF_CMR_KEY)) {
             SharedPreferences.Editor editor = mAppPrefs.edit();
             editor.putString(PREF_CMR_KEY, getString(R.string.default_cmr));
+            editor.commit();
+        }
+
+        PREF_LOCATION_KEY = getResources().getString(R.string.pref_location_key);
+        if (!mAppPrefs.contains(PREF_LOCATION_KEY)) {
+            SharedPreferences.Editor editor = mAppPrefs.edit();
+            editor.putString(PREF_LOCATION_KEY, getString(R.string.default_location));
             editor.commit();
         }
 

@@ -1,6 +1,7 @@
 package com.mobley.apinventory.dialogs;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
@@ -17,7 +18,7 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
 
     private APInventoryApp mApp;
     private TextView mLocationNum, mLocationDesc;
-    private Button mGoButton;
+    private Button mGoButton, mSetLocationButton;
     public String mNum;
     public String mDesc;
 
@@ -58,6 +59,8 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
 
         mGoButton = view.findViewById(R.id.locationDlgGoButton);
         mGoButton.setOnClickListener(this);
+        mSetLocationButton = view.findViewById(R.id.locationDlgSetLocationButton);
+        mSetLocationButton.setOnClickListener(this);
 
         return view;
     }
@@ -71,6 +74,10 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
             //hideKeyboard(this);
 
             dismiss();
+        } else if (view == mSetLocationButton) {
+            SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
+            editor.putString(APInventoryApp.PREF_LOCATION_KEY, mDesc);
+            editor.commit();
         }
     }
 

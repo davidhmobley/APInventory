@@ -37,8 +37,7 @@
                     style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:inputType="number"/>
+                    android:layout_marginLeft="5dp"/>
 
             </TableRow>
 
@@ -59,8 +58,7 @@
                     style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:inputType="number"/>
+                    android:layout_marginLeft="5dp"/>
 
             </TableRow>
 
@@ -81,8 +79,28 @@
                     style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:inputType="number"/>
+                    android:layout_marginLeft="5dp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    style="@style/My_Bold_TextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:text="@string/mainLocation"/>
+
+                <TextView
+                    android:id="@+id/mainLocationTV2"
+                    style="@style/My_Normal_TextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"/>
 
             </TableRow>
 
@@ -99,7 +117,7 @@
                     android:text="@string/mainAssets"/>
 
                 <TextView
-                    android:id="@+id/mainAssetsTV2"
+                    android:id="@+id/mainNumAssetsTV2"
                     style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,7 +138,7 @@
                     android:text="@string/mainScannedAssets"/>
 
                 <TextView
-                    android:id="@+id/mainScannedAssetsTV2"
+                    android:id="@+id/mainNumScannedAssetsTV2"
                     style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -138,14 +156,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
-                    android:text="@string/mainLocations"/>
+                    android:text="@string/mainLocations" />
 
                 <TextView
-                    android:id="@+id/mainLocationsTV2"
+                    android:id="@+id/mainNumLocationsTV2"
                     style="@style/My_Normal_TextAppearance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp" />
 
             </TableRow>
 

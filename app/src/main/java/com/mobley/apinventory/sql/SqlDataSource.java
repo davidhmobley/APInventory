@@ -162,7 +162,6 @@ public class SqlDataSource {
 						values,
 						Assets.ASSETS_COL_ID + "=?",
 						whereArgs);
-		Log.i(TAG, "***i: " + i);
 	}
 
 	public List<Assets> getAssetNum(String assetNum) {

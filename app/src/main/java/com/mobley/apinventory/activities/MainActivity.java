@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int REQUEST_READ_WRITE_PERMISSION = 1;
 
     private TextView mNumAssetsTV2, mNumScannedAssetsTV2, mNumLocationsTV2;
-    private TextView mAinTV2, mCicTV2, mCmrTV2, mMainImportTimestampTV;
+    private TextView mAinTV2, mCicTV2, mCmrTV2, mLocationTV2, mMainImportTimestampTV;
     private Button mScanButton, mImportButton, mExportButton;
 
     private APInventoryApp mApp;
@@ -65,9 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAinTV2 = findViewById(R.id.mainAINTV2);
         mCicTV2 = findViewById(R.id.mainCICTV2);
         mCmrTV2 = findViewById(R.id.mainCMRTV2);
-        mNumAssetsTV2 = findViewById(R.id.mainAssetsTV2);
-        mNumScannedAssetsTV2 = findViewById(R.id.mainScannedAssetsTV2);
-        mNumLocationsTV2 = findViewById(R.id.mainLocationsTV2);
+        mLocationTV2 = findViewById(R.id.mainLocationTV2);
+        mNumAssetsTV2 = findViewById(R.id.mainNumAssetsTV2);
+        mNumScannedAssetsTV2 = findViewById(R.id.mainNumScannedAssetsTV2);
+        mNumLocationsTV2 = findViewById(R.id.mainNumLocationsTV2);
         mMainImportTimestampTV = findViewById(R.id.mainImportTimestampTV);
 
         mScanButton = findViewById(R.id.mainScanButton);
@@ -250,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAinTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
         mCicTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
         mCmrTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
+        mLocationTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_LOCATION_KEY, getString(R.string.default_location)));
 
         checkDBCounts(false, false);
     }

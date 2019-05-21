@@ -27,6 +27,7 @@
     <string name="mainAIN">AIN:</string>
     <string name="mainCIC">CIC:</string>
     <string name="mainCMR">CMR:</string>
+    <string name="mainLocation">Location:</string>
     <string name="mainAssets">Num Assets:</string>
     <string name="mainScannedAssets">Scanned Assets:</string>
     <string name="mainLocations">Num Locations:</string>
@@ -70,7 +71,8 @@
     <string name="asset_dlg_asset_cic">CIC:</string>
     <string name="asset_dlg_asset_cmr">CMR:</string>
     <string name="asset_dlg_last_inv_date">LastInvDate:</string>
-    <string name="asset_dlg_go_button">Go!</string>
+    <string name="asset_dlg_go_button">Ok</string>
+    <string name="asset_dlg_set_location_button">Set Location</string>
 
     <!-- Location Dialog -->
     <string name="location_dlg_title">Location</string>
@@ -83,6 +85,7 @@
     <string name="default_ain"></string>
     <string name="default_cic"></string>
     <string name="default_cmr"></string>
+    <string name="default_location"></string>
 
     <string name="pref_category_info_title">User Info</string>
     <string name="pref_category_info_summary">Set User Information</string>
@@ -108,5 +111,6 @@
     <string name="pref_cmr_summary">CMR String</string>
 
     <string name="pref_import_timestamp_key">ImportTimestamp</string>
+    <string name="pref_location_key">Location</string>
 
 </resources>
