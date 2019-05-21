@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setImportTimestamp();
 
-        if (countAssets == 0l || countLocations == 0l) {
+        if ((countAssets == 0l || countLocations == 0l) || mLocationTV2.getText().toString().equals("")) {
             mScanButton.setEnabled(false);
 
             // reset import timestamp
