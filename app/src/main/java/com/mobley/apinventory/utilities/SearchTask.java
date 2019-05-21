@@ -17,7 +17,7 @@ import com.mobley.apinventory.sql.tables.Locations;
 import java.util.Calendar;
 import java.util.List;
 
-public class SearchTask extends AsyncTask<String, Long, Void> {
+public class SearchTask extends AsyncTask<String, Void, Void> {
     protected static final String TAG = SearchTask.class.getSimpleName();
 
     private Context mContext;
