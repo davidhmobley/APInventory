@@ -93,6 +93,7 @@
     <string name="pref_version_key">Version</string>
     <string name="pref_version_title">App Version</string>
     <string name="pref_version_summary">Current App Version</string>
+    <string name="pref_version_str">Version: v</string>
 
     <string name="pref_category_ain">Agency Identification Number</string>
     <string name="pref_ain_key">AIN</string>

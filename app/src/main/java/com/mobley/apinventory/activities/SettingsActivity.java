@@ -2,7 +2,9 @@ package com.mobley.apinventory.activities;
 
 import java.util.List;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.view.Menu;
@@ -88,11 +90,25 @@ public class SettingsActivity extends PreferenceActivity {
 		/** Logging tag */
 		protected static final String TAG = VersionPreferences.class.getSimpleName();
 
+		APInventoryApp mApp;
+
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 
+			mApp = (APInventoryApp) getActivity().getApplication();
+
 			addPreferencesFromResource(R.xml.version_prefs);
+
+			EditTextPreference versionPref = (EditTextPreference)findPreference(APInventoryApp.PREF_VERSION_KEY);
+			String version = null;
+			try {
+				version = getActivity().getPackageManager().getPackageInfo(mApp.getPackageName(), 0).versionName;
+			} catch (PackageManager.NameNotFoundException e) {
+				version = "???";
+				e.printStackTrace();
+			}
+			versionPref.setTitle(getString(R.string.pref_version_str) + version);
 		}
 	}
 
