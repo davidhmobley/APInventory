@@ -138,13 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
 
                 break;
-            case R.id.action_view_locationstest:
-                bOK = true; // processed
-
-                intent = new Intent(this, ViewLocationsActivityTest.class);
-                startActivity(intent);
-
-                break;
             case R.id.action_delete_assets:
                 bOK = true; // processed
 

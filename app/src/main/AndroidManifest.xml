@@ -39,8 +39,6 @@
 
         <activity android:name=".activities.ViewLocationsActivity"/>
 
-        <activity android:name=".activities.ViewLocationsActivityTest"/>
-
         <activity android:name=".activities.SettingsActivity"
             android:theme="@android:style/Theme.Holo"
             android:exported="false" />

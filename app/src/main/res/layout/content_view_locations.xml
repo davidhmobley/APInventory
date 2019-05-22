@@ -8,9 +8,16 @@
     tools:context=".activities.ViewLocationsActivity"
     tools:showIn="@layout/activity_view_locations">
 
+    <EditText
+        android:id="@+id/locationsET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/locationsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/locationsET"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
@@ -22,6 +25,7 @@ import com.mobley.apinventory.dialogs.LocationDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
+import com.mobley.apinventory.utilities.SearchTask;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -32,9 +36,11 @@ public class ViewLocationsActivity extends AppCompatActivity {
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     private List<Locations> mLocations = null;
+    private EditText mLocationsET;
     private RecyclerView mRecyclerView;
     private CustomViewLocationsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private CharSequence mCharSeq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,27 @@ public class ViewLocationsActivity extends AppCompatActivity {
         //actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
+        mLocationsET = findViewById(R.id.locationsET);
+        mLocationsET.requestFocus();
+        mLocationsET.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                mCharSeq = cs;
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                new SearchTask(ViewLocationsActivity.this, mSqlDataSource).execute(mCharSeq.toString().trim());
+            }
+
+        });
 
         mRecyclerView = findViewById(R.id.locationsRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
@@ -111,5 +138,14 @@ public class ViewLocationsActivity extends AppCompatActivity {
         }
 
         return bOK;
+    }
+
+    public void setLocations(List<Locations> locations) {
+        if (LogConfig.ON) Log.d(TAG, "setLocations()");
+
+        mLocations = locations;
+
+        mAdapter = new CustomViewLocationsAdapter(mLocations, mApp);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

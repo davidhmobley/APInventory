@@ -1,20 +1,14 @@
 package com.mobley.apinventory.utilities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
-import com.mobley.apinventory.R;
-import com.mobley.apinventory.activities.MainActivity;
-import com.mobley.apinventory.activities.ViewLocationsActivityTest;
+import com.mobley.apinventory.activities.ViewLocationsActivity;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Locations;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class SearchTask extends AsyncTask<String, Void, Void> {
@@ -45,6 +39,6 @@ public class SearchTask extends AsyncTask<String, Void, Void> {
         super.onPostExecute(aVoid);
         if (LogConfig.ON) Log.d(TAG, "onPostExecute()");
 
-        ((ViewLocationsActivityTest) mContext).setLocations(mLocationList);
+        ((ViewLocationsActivity) mContext).setLocations(mLocationList);
     }
 }
