@@ -36,8 +36,8 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     //private List<Assets> mAssets = null;
-    private TextView mScanAssetTV, mScanAssetDescTV2, mScanAssetCicTV2, mScanAssetCmrTV2;
-    private EditText mScanAssetET;
+    private TextView mScanAssetBCNTV, mScanAssetNumTV, mScanAssetDescTV2, mScanAssetCicTV2, mScanAssetCmrTV2;
+    private EditText mScanAssetBCNET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,10 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        mScanAssetTV = findViewById(R.id.scanAssetTV);
-        mScanAssetET = findViewById(R.id.scanAssetET);
-        mScanAssetET.requestFocus();
+        mScanAssetBCNTV = findViewById(R.id.scanAssetBCNTV);
+        mScanAssetBCNET = findViewById(R.id.scanAssetBCNET);
+        mScanAssetBCNET.requestFocus();
+        mScanAssetNumTV = findViewById(R.id.scanAssetNumTV);
         mScanAssetDescTV2 = findViewById(R.id.scanAssetDescTV2);
         mScanAssetCicTV2 = findViewById(R.id.scanAssetCicTV2);
         mScanAssetCmrTV2 = findViewById(R.id.scanAssetCmrTV2);
@@ -102,17 +103,17 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
         if (view == mGoButton) {
             hideKeyboard(this);
 
-            if (TextUtils.isEmpty(mScanAssetET.getText())) {
+            if (TextUtils.isEmpty(mScanAssetBCNET.getText())) {
                 bGood = false;
-                mScanAssetTV.setTextColor(Color.RED);
-                mScanAssetET.requestFocus();
+                mScanAssetBCNTV.setTextColor(Color.RED);
+                mScanAssetBCNET.requestFocus();
             } else {
-                mScanAssetTV.setTextColor(Color.BLACK);
+                mScanAssetBCNTV.setTextColor(Color.BLACK);
             }
 
             if (bGood) {
                 mSqlDataSource.open();
-                List<Assets> assets = mSqlDataSource.getAssetNum(mScanAssetET.getText().toString());
+                List<Assets> assets = mSqlDataSource.getAssetByBCN(mScanAssetBCNET.getText().toString());
                 mSqlDataSource.close();
 
                 if (assets.size() == 0) {
@@ -120,6 +121,7 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
                 } else if (assets.size() > 1) {
                     mApp.mySnackbar(view, "too many matches", true);
                 } else { // exactly one!
+                    mScanAssetNumTV.setText(assets.get(0).getAssetNum());
                     mScanAssetDescTV2.setText(assets.get(0).getDescription());
                     mScanAssetCicTV2.setText(assets.get(0).getCIC());
                     mScanAssetCmrTV2.setText(assets.get(0).getCMR());

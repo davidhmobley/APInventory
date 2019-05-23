@@ -164,8 +164,43 @@ public class SqlDataSource {
 						whereArgs);
 	}
 
-	public List<Assets> getAssetNum(String assetNum) {
-		if (LogConfig.ON) Log.d(TAG, "getAssetNum(" + assetNum + ")");
+	public List<Assets> getAssetByBCN(String assetBCN) {
+		if (LogConfig.ON) Log.d(TAG, "getAssetByBCN(" + assetBCN + ")");
+
+		List<Assets> assets = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
+				allAssetsCols,
+				Assets.ASSETS_COL_BCN + "=?",
+				new String[] { assetBCN },
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				assets.add(new Assets(
+						c.getLong(0), // id
+						c.getString(1), // assetNum
+						c.getString(2), // barcodeNum
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return assets; // probably just one!
+	}
+
+	public List<Assets> getAssetByNum(String assetNum) {
+		if (LogConfig.ON) Log.d(TAG, "getAssetByNum(" + assetNum + ")");
 
 		List<Assets> assets = new ArrayList<>();
 
@@ -199,8 +234,8 @@ public class SqlDataSource {
 		return assets; // probably just one!
 	}
 
-	public List<Assets> getScannedAssetNum(String assetNum) {
-		if (LogConfig.ON) Log.d(TAG, "getScannedAssetNum(" + assetNum + ")");
+	public List<Assets> getScannedAssetByNum(String assetNum) {
+		if (LogConfig.ON) Log.d(TAG, "getScannedAssetByNum(" + assetNum + ")");
 
 		List<Assets> assets = new ArrayList<>();
 

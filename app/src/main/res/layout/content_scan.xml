@@ -19,21 +19,42 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/scanAssetTV"
+                android:id="@+id/scanAssetBCNTV"
                 style="@style/My_Bold_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
-                android:text="@string/scan_asset_label"/>
+                android:text="@string/scan_asset_bcn_label"/>
 
             <EditText
-                android:id="@+id/scanAssetET"
+                android:id="@+id/scanAssetBCNET"
                 style="@style/My_Normal_TextAppearance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:inputType="text"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/My_Bold_TextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:text="@string/scan_asset_num_label"/>
+
+            <TextView
+                android:id="@+id/scanAssetNumTV"
+                style="@style/My_Normal_TextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"/>
 
         </TableRow>
 

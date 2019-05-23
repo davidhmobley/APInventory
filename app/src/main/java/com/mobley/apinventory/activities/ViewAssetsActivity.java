@@ -176,9 +176,9 @@ public class ViewAssetsActivity extends AppCompatActivity {
         mSqlDataSource.open();
 
         if (mShowWhat == ALL_ASSETS) {
-            mAssets = mSqlDataSource.getAssetNum(query);
+            mAssets = mSqlDataSource.getAssetByNum(query);
         } else if (mShowWhat == ALL_SCANNED_ASSETS) {
-            mAssets = mSqlDataSource.getScannedAssetNum(query);
+            mAssets = mSqlDataSource.getScannedAssetByNum(query);
         }
 
         mSqlDataSource.close();
