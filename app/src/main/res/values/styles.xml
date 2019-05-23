@@ -139,7 +139,7 @@
 
     <style name="MyAlertDialogButtonBarButtonStyle">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textSize">@dimen/text_size_mediumlarge</item>
         <item name="android:background">@drawable/text_button_selector</item>
     </style>
 
