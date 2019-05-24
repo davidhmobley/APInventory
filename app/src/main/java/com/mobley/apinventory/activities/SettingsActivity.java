@@ -101,14 +101,8 @@ public class SettingsActivity extends PreferenceActivity {
 			addPreferencesFromResource(R.xml.version_prefs);
 
 			EditTextPreference versionPref = (EditTextPreference)findPreference(APInventoryApp.PREF_VERSION_KEY);
-			String version = null;
-			try {
-				version = getActivity().getPackageManager().getPackageInfo(mApp.getPackageName(), 0).versionName;
-			} catch (PackageManager.NameNotFoundException e) {
-				version = "???";
-				e.printStackTrace();
-			}
-			versionPref.setTitle(getString(R.string.pref_version_str) + version);
+			String version = mApp.getAppPrefs().getString(APInventoryApp.PREF_VERSION_KEY, "???");
+			versionPref.setTitle(getString(R.string.pref_version_str) + " " + version);
 		}
 	}
 
