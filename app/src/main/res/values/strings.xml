@@ -86,15 +86,24 @@
     <string name="default_cic"></string>
     <string name="default_cmr"></string>
     <string name="default_location"></string>
+    <string name="default_author">David H. Mobley</string>
 
     <string name="pref_category_info_title">User Info</string>
     <string name="pref_category_info_summary">Set User Information</string>
+    <string name="pref_category_about_title">About</string>
+    <string name="pref_category_about_summary">About Information</string>
 
     <string name="pref_category_version">Version</string>
+    <string name="pref_version_title">Version</string>
+    <string name="pref_version_summary">Version of App</string>
     <string name="pref_version_key">Version</string>
-    <string name="pref_version_title">App Version</string>
-    <string name="pref_version_summary">Current App Version</string>
     <string name="pref_version_str">Version:</string>
+
+    <string name="pref_category_author">Author</string>
+    <string name="pref_author_title">Author</string>
+    <string name="pref_author_summary">Author of App</string>
+    <string name="pref_author_key">AppAuthor</string>
+    <string name="pref_author_str">Author:</string>
 
     <string name="pref_category_ain">Agency Identification Number</string>
     <string name="pref_ain_key">AIN</string>

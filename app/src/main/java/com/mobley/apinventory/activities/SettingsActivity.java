@@ -2,7 +2,6 @@ package com.mobley.apinventory.activities;
 
 import java.util.List;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
@@ -39,7 +38,7 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     protected boolean isValidFragment(String fragmentName) {
         if (fragmentName.equals("com.mobley.apinventory.activities.SettingsActivity$InfoPreferences") ||
-				fragmentName.equals("com.mobley.apinventory.activities.SettingsActivity$VersionPreferences"))
+				fragmentName.equals("com.mobley.apinventory.activities.SettingsActivity$AboutPreferences"))
         {
 			return true;
 		} else {
@@ -82,13 +81,13 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
 	/**
-	 * Version Preferences Fragment
+	 * About Preferences Fragment
 	 * @author mobleyd
 	 *
 	 */
-	public static class VersionPreferences extends PreferenceFragment {
+	public static class AboutPreferences extends PreferenceFragment {
 		/** Logging tag */
-		protected static final String TAG = VersionPreferences.class.getSimpleName();
+		protected static final String TAG = AboutPreferences.class.getSimpleName();
 
 		APInventoryApp mApp;
 
@@ -98,11 +97,17 @@ public class SettingsActivity extends PreferenceActivity {
 
 			mApp = (APInventoryApp) getActivity().getApplication();
 
-			addPreferencesFromResource(R.xml.version_prefs);
+			addPreferencesFromResource(R.xml.about_prefs);
 
+			// Version
 			EditTextPreference versionPref = (EditTextPreference)findPreference(APInventoryApp.PREF_VERSION_KEY);
 			String version = mApp.getAppPrefs().getString(APInventoryApp.PREF_VERSION_KEY, "???");
 			versionPref.setTitle(getString(R.string.pref_version_str) + " " + version);
+
+			// Author
+			EditTextPreference aboutPref = (EditTextPreference)findPreference(APInventoryApp.PREF_AUTHOR_KEY);
+			String author = mApp.getAppPrefs().getString(APInventoryApp.PREF_AUTHOR_KEY, "???");
+			aboutPref.setTitle(getString(R.string.pref_author_str) + " " + author);
 		}
 	}
 

@@ -17,6 +17,7 @@ public class APInventoryApp extends Application {
     public static final String NO = "N";
 
     public static String PREF_VERSION_KEY;
+    public static String PREF_AUTHOR_KEY;
     public static String PREF_AIN_KEY;
     public static String PREF_CIC_KEY;
     public static String PREF_CMR_KEY;
@@ -46,6 +47,13 @@ public class APInventoryApp extends Application {
             }
 
             editor.putString(PREF_VERSION_KEY, ver);
+            editor.commit();
+        }
+
+        PREF_AUTHOR_KEY = getResources().getString(R.string.pref_author_key);
+        if (!mAppPrefs.contains(PREF_AUTHOR_KEY)) {
+            SharedPreferences.Editor editor = mAppPrefs.edit();
+            editor.putString(PREF_AUTHOR_KEY, getString(R.string.default_author));
             editor.commit();
         }
 
