@@ -286,17 +286,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if ((countAssets == 0l || countLocations == 0l) || mLocationTV2.getText().toString().equals("")) {
             mScanButton.setEnabled(false);
+        } else if (countAssets == 0l || countLocations == 0l) {
+            mScanButton.setEnabled(false);
 
             // reset import timestamp
             SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
             editor.putLong(APInventoryApp.PREF_IMPORT_TIMESTAMP_KEY, 0l);
             editor.commit();
-
         } else {
             mScanButton.setEnabled(true);
         }
 
-        setImportTimestamp();
+        setImportTimestamp(); // show when IMPORT occurred
 
         if (bImportComplete) {
             mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
