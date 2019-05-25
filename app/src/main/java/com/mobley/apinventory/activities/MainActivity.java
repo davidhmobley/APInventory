@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
+import com.mobley.apinventory.dialogs.InfoDialog;
+import com.mobley.apinventory.dialogs.LocationDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.utilities.ExportCounts;
@@ -77,6 +79,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mImportButton.setOnClickListener(this);
         mExportButton = findViewById(R.id.mainExportButton);
         mExportButton.setOnClickListener(this);
+
+        String firstTime = mApp.getAppPrefs().getString(APInventoryApp.PREF_FIRST_TIME_KEY, APInventoryApp.YES);
+        if (firstTime.equals(APInventoryApp.YES)) {
+            // allow user to easily enter required shared preferences
+            InfoDialog dlg = (InfoDialog) InfoDialog.newInstance();
+            dlg.setContext(this);
+            dlg.show(getSupportFragmentManager(), "Information");
+
+            // turn off
+            SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
+            editor.putString(APInventoryApp.PREF_FIRST_TIME_KEY, APInventoryApp.NO);
+            editor.commit();
+        }
 
         verifyPermissions(this);
     }
@@ -241,12 +256,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         if (LogConfig.ON) Log.d(TAG, "onResume()");
 
-        mAinTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
-        mCicTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
-        mCmrTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
+        setSharedPrefs();
         mLocationTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_LOCATION_KEY, getString(R.string.default_location)));
 
         checkDBCounts(false, false);
+    }
+
+    public void setSharedPrefs() {
+        if (LogConfig.ON) Log.d(TAG, "setSharedPrefs()");
+
+        mAinTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_AIN_KEY, getString(R.string.default_ain)));
+        mCicTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CIC_KEY, getString(R.string.default_cic)));
+        mCmrTV2.setText(mApp.getAppPrefs().getString(APInventoryApp.PREF_CMR_KEY, getString(R.string.default_cmr)));
     }
 
     public void checkDBCounts(boolean bImportComplete, boolean bDeleteComplete) {
@@ -262,8 +283,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNumScannedAssetsTV2.setText(String.valueOf(nf.format(mSqlDataSource.getNumScannedAssets())));
         mNumLocationsTV2.setText(String.valueOf(nf.format(countLocations)));
         mSqlDataSource.close();
-
-        setImportTimestamp();
 
         if ((countAssets == 0l || countLocations == 0l) || mLocationTV2.getText().toString().equals("")) {
             mScanButton.setEnabled(false);

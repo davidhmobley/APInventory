@@ -79,6 +79,13 @@
     <string name="location_dlg_location_num">Num:</string>
     <string name="location_dlg_location_desc">Desc:</string>
 
+    <!-- Info Dialog -->
+    <string name="info_dlg_title">User Info</string>
+    <string name="info_dlg_ain">AIN:</string>
+    <string name="info_dlg_cic">CIC:</string>
+    <string name="info_dlg_cmr">CMR:</string>
+    <string name="info_dlg_go_button">Go!</string>
+
     <string name="import_progress_msg">Loading %1$s (%2$d)</string>
     <string name="export_progress_msg">Exporting Assets (%1$d)</string>
 
@@ -87,6 +94,8 @@
     <string name="default_cmr"></string>
     <string name="default_location"></string>
     <string name="default_author">David H. Mobley</string>
+
+    <string name="pref_first_time_key">FirstTime</string>
 
     <string name="pref_category_info_title">User Info</string>
     <string name="pref_category_info_summary">Set User Information</string>

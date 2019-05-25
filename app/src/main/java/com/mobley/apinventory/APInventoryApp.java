@@ -16,6 +16,7 @@ public class APInventoryApp extends Application {
     public static final String YES = "Y";
     public static final String NO = "N";
 
+    public static String PREF_FIRST_TIME_KEY;
     public static String PREF_VERSION_KEY;
     public static String PREF_AUTHOR_KEY;
     public static String PREF_AIN_KEY;
@@ -33,6 +34,14 @@ public class APInventoryApp extends Application {
         super.onCreate();
 
         mAppPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // first time app has been run
+        PREF_FIRST_TIME_KEY = getResources().getString(R.string.pref_first_time_key);
+        if (!mAppPrefs.contains(PREF_FIRST_TIME_KEY)) {
+            SharedPreferences.Editor editor = mAppPrefs.edit();
+            editor.putString(PREF_FIRST_TIME_KEY, YES);
+            editor.commit();
+        }
 
         PREF_VERSION_KEY = getResources().getString(R.string.pref_version_key);
         if (!mAppPrefs.contains(PREF_VERSION_KEY)) {
