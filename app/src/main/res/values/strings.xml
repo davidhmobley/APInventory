@@ -95,13 +95,13 @@
 
     <string name="pref_category_version">Version</string>
     <string name="pref_version_title">Version</string>
-    <string name="pref_version_summary">Version of App</string>
+    <!-- string name="pref_version_summary">Version of App</string -->
     <string name="pref_version_key">Version</string>
     <string name="pref_version_str">Version:</string>
 
     <string name="pref_category_author">Author</string>
     <string name="pref_author_title">Author</string>
-    <string name="pref_author_summary">Author of App</string>
+    <!-- string name="pref_author_summary">Author of App</string -->
     <string name="pref_author_key">AppAuthor</string>
     <string name="pref_author_str">Author:</string>
 

@@ -5,22 +5,22 @@
         <EditTextPreference
             android:key="@string/pref_version_key"
             android:title="@string/pref_version_title"
-            android:summary="@string/pref_version_summary"
             android:enabled="false"
             android:selectable="false"
             android:persistent="false"
             android:shouldDisableView="false"/>
     </PreferenceCategory>
+    <!-- android:summary="@string/pref_version_summary" -->
 
     <PreferenceCategory android:title="@string/pref_category_author" >
         <EditTextPreference
             android:key="@string/pref_author_key"
             android:title="@string/pref_author_title"
-            android:summary="@string/pref_author_summary"
             android:enabled="false"
             android:selectable="false"
             android:persistent="false"
             android:shouldDisableView="false"/>
     </PreferenceCategory>
+    <!-- android:summary="@string/pref_author_summary" -->
 
 </PreferenceScreen>

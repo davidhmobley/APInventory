@@ -60,6 +60,7 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
         mGoButton = view.findViewById(R.id.locationDlgGoButton);
         mGoButton.setOnClickListener(this);
         mSetLocationButton = view.findViewById(R.id.locationDlgSetLocationButton);
+        mSetLocationButton.setEnabled(true);
         mSetLocationButton.setOnClickListener(this);
 
         return view;
@@ -78,6 +79,8 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
             SharedPreferences.Editor editor = mApp.getAppPrefs().edit();
             editor.putString(APInventoryApp.PREF_LOCATION_KEY, mDesc);
             editor.commit();
+
+            mSetLocationButton.setEnabled(false);
         }
     }
 
