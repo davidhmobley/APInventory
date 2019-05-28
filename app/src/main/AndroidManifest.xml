@@ -24,9 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".activities.ViewAssetsActivity" >
+        <activity android:name=".activities.ViewAssetsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -35,13 +37,16 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <activity android:name=".activities.ScanActivity"/>
+        <activity android:name=".activities.ScanActivity"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".activities.ViewLocationsActivity"/>
+        <activity android:name=".activities.ViewLocationsActivity"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".activities.SettingsActivity"
             android:theme="@android:style/Theme.Holo"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
     </application>
 
