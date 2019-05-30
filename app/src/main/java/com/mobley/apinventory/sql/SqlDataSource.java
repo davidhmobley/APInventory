@@ -99,7 +99,7 @@ public class SqlDataSource {
 							 String cmr,
 							 long chgDate,
 							 long invDate) {
-		if (LogConfig.ON) Log.d(TAG, "insertAssets()");
+		//if (LogConfig.ON) Log.d(TAG, "insertAssets()");
 
 		ContentValues values = new ContentValues();
 
@@ -121,7 +121,6 @@ public class SqlDataSource {
 		if (LogConfig.ON) Log.d(TAG, "deleteAssets()");
 
 		int count = mDatabase.delete(Assets.ASSETS_TABLE_NAME, "1", null);
-		if (LogConfig.ON) Log.d(TAG, "...count: " + count);
 
 		return count;
 	}
@@ -345,7 +344,7 @@ public class SqlDataSource {
 	/*******************************/
 
 	public void insertLocations(String locNum, String locDesc) {
-		if (LogConfig.ON) Log.d(TAG, "insertLocations()");
+		//if (LogConfig.ON) Log.d(TAG, "insertLocations()");
 
 		ContentValues values = new ContentValues();
 
@@ -361,7 +360,6 @@ public class SqlDataSource {
 		if (LogConfig.ON) Log.d(TAG, "deleteLocations()");
 
 		int count = mDatabase.delete(Locations.LOCATIONS_TABLE_NAME, "1", null);
-		if (LogConfig.ON) Log.d(TAG, "...count: " + count);
 
 		return count;
 	}
