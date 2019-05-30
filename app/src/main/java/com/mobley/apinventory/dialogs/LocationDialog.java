@@ -81,7 +81,7 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
             editor.commit();
 
             mSetLocationButton.setEnabled(false);
-            mApp.mySnackbar(view, String.format(getString(R.string.view_locations_set), mDesc), true);
+            mApp.mySnackbar(view, String.format(getString(R.string.view_locations_set), mDesc), false);
         }
     }
 
