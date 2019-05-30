@@ -66,11 +66,7 @@ public class ImportTask extends AsyncTask<Void, Long, Void> {
         nAssetsDeleted = mSqlDataSource.deleteAssets();
         nLocationsDeleted = mSqlDataSource.deleteLocations();
 
-        if (nAssetsDeleted == 0 && nLocationsDeleted == 0) {
-            // rollback
-        } else {
-            mSqlDataSource.commitTransaction();
-        }
+        mSqlDataSource.commitTransaction();
         mSqlDataSource.endTransaction();
         mSqlDataSource.close();
 
