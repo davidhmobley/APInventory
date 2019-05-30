@@ -103,7 +103,6 @@ public class ViewLocationsActivity extends AppCompatActivity {
                 LocationDialog dlg = (LocationDialog) LocationDialog.newInstance();
                 dlg.setNum(location.getLocationNum());
                 dlg.setDesc(location.getLocationDesc());
-                dlg.setContext(ViewLocationsActivity.this);
                 dlg.show(getSupportFragmentManager(), "Location");
             }
 
@@ -148,13 +147,5 @@ public class ViewLocationsActivity extends AppCompatActivity {
 
         mAdapter = new CustomViewLocationsAdapter(mLocations, mApp);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    public void showSetLocation(String locationDesc) {
-        if (LogConfig.ON) Log.d(TAG, "showSetLocation()");
-
-        mApp.mySnackbar(getWindow().getDecorView().findViewById(android.R.id.content),
-                  String.format(getString(R.string.view_locations_set), locationDesc),
-                 true);
     }
 }
