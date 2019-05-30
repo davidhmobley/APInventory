@@ -63,6 +63,7 @@
 
     <!-- View Locations Activity -->
     <string name="view_locations_subtitle">All Locations (%1$s)</string>
+    <string name="view_locations_set">Location set to %1$s</string>
 
     <!-- Asset Dialog -->
     <string name="asset_dlg_title">Asset</string>

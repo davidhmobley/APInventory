@@ -1,6 +1,7 @@
 package com.mobley.apinventory.dialogs;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.R;
+import com.mobley.apinventory.activities.MainActivity;
+import com.mobley.apinventory.activities.ViewLocationsActivity;
 
 public class LocationDialog extends AppCompatDialogFragment implements View.OnClickListener {
     protected static final String TAG = LocationDialog.class.getSimpleName();
@@ -21,6 +24,7 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
     private Button mGoButton, mSetLocationButton;
     public String mNum;
     public String mDesc;
+    public Context mContext;
 
     public static AppCompatDialogFragment newInstance() {
         AppCompatDialogFragment dialogFragment = new LocationDialog();
@@ -81,6 +85,7 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
             editor.commit();
 
             mSetLocationButton.setEnabled(false);
+            ((ViewLocationsActivity) mContext).showSetLocation(mDesc);
         }
     }
 
@@ -90,5 +95,9 @@ public class LocationDialog extends AppCompatDialogFragment implements View.OnCl
 
     public void setDesc(String mDesc) {
         this.mDesc = mDesc;
+    }
+
+    public void setContext(Context mContext) {
+        this.mContext = mContext;
     }
 }
