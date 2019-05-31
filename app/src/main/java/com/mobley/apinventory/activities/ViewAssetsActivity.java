@@ -1,7 +1,6 @@
 package com.mobley.apinventory.activities;
 
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -9,12 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.mobley.apinventory.APInventoryApp;
 import com.mobley.apinventory.LogConfig;
@@ -24,6 +25,7 @@ import com.mobley.apinventory.adapters.RecyclerTouchListener;
 import com.mobley.apinventory.dialogs.AssetDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
 import com.mobley.apinventory.sql.tables.Assets;
+import com.mobley.apinventory.utilities.SearchAssetsTask;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -38,11 +40,13 @@ public class ViewAssetsActivity extends AppCompatActivity {
     private APInventoryApp mApp;
     private SqlDataSource mSqlDataSource = null;
     private List<Assets> mAssets = null;
+    private EditText mAssetsET;
     private RecyclerView mRecyclerView;
     private CustomViewAssetsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private boolean skipFetchAllAssets = false;
     private int mShowWhat; // All or Scanned Assets
+    private CharSequence mCharSeq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,26 @@ public class ViewAssetsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
+        mAssetsET = findViewById(R.id.assetsET);
+        mAssetsET.requestFocus();
+        mAssetsET.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                mCharSeq = cs;
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                new SearchAssetsTask(ViewAssetsActivity.this, mSqlDataSource).execute(mCharSeq.toString().trim());
+            }
+        });
+
         mRecyclerView = findViewById(R.id.assetsRecyclerView);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -129,16 +153,6 @@ public class ViewAssetsActivity extends AppCompatActivity {
         // Inflate the options menu from XML
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_view_assets, menu);
-
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(true);
-        searchView.setSubmitButtonEnabled(true);
-
         return true;
     }
 
@@ -182,5 +196,14 @@ public class ViewAssetsActivity extends AppCompatActivity {
         }
 
         mSqlDataSource.close();
+    }
+
+    public void setAssets(List<Assets> assets) {
+        if (LogConfig.ON) Log.d(TAG, "setAssets()");
+
+        mAssets = assets;
+
+        mAdapter = new CustomViewAssetsAdapter(mAssets, mApp);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

@@ -29,14 +29,7 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activities.ViewAssetsActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".activities.ScanActivity"
             android:screenOrientation="portrait"/>

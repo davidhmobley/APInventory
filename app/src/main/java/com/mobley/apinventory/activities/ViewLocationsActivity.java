@@ -1,6 +1,5 @@
 package com.mobley.apinventory.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +19,10 @@ import com.mobley.apinventory.LogConfig;
 import com.mobley.apinventory.R;
 import com.mobley.apinventory.adapters.CustomViewLocationsAdapter;
 import com.mobley.apinventory.adapters.RecyclerTouchListener;
-import com.mobley.apinventory.dialogs.AssetDialog;
 import com.mobley.apinventory.dialogs.LocationDialog;
 import com.mobley.apinventory.sql.SqlDataSource;
-import com.mobley.apinventory.sql.tables.Assets;
 import com.mobley.apinventory.sql.tables.Locations;
-import com.mobley.apinventory.utilities.SearchTask;
+import com.mobley.apinventory.utilities.SearchLocationsTask;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -82,9 +79,8 @@ public class ViewLocationsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable arg0) {
-                new SearchTask(ViewLocationsActivity.this, mSqlDataSource).execute(mCharSeq.toString().trim());
+                new SearchLocationsTask(ViewLocationsActivity.this, mSqlDataSource).execute(mCharSeq.toString().trim());
             }
-
         });
 
         mRecyclerView = findViewById(R.id.locationsRecyclerView);

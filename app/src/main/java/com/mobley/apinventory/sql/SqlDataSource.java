@@ -338,6 +338,76 @@ public class SqlDataSource {
 		return assets;
 	}
 
+	public List<Assets> getAssetsByDesc(String startsWith) {
+		if (LogConfig.ON) Log.d(TAG, "getAssetsByDesc(" + startsWith + ")");
+
+		List<Assets> assets = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
+				allAssetsCols,
+				Assets.ASSETS_COL_DESCRIPTION + " like ?",
+				new String[] { startsWith+"%" },
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				assets.add(new Assets(
+						c.getLong(0), // id
+						c.getString(1), // assetNum
+						c.getString(2), // barcodeNum
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return assets;
+	}
+
+	public List<Assets> getScannedAssetsByDesc(String startsWith) {
+		if (LogConfig.ON) Log.d(TAG, "getScannedAssetsByDesc(" + startsWith + ")");
+
+		List<Assets> assets = new ArrayList<>();
+
+		Cursor c = mDatabase.query(Assets.ASSETS_TABLE_NAME,
+				allAssetsCols,
+				Assets.ASSETS_COL_DESCRIPTION + " like ? and " + Assets.ASSETS_COL_DIRTY + "=?",
+				new String[] { startsWith+"%", APInventoryApp.YES },
+				null,
+				null,
+				null);
+
+		if (c != null) {
+			c.moveToFirst();
+			while (!c.isAfterLast()) {
+				assets.add(new Assets(
+						c.getLong(0), // id
+						c.getString(1), // assetNum
+						c.getString(2), // barcodeNum
+						c.getString(3), // description
+						c.getString(4), // cic
+						c.getString(5), // cmr
+						c.getLong(6), // chg_date
+						c.getLong(7), // last_inv_date
+						c.getString(8))); // dirty
+
+				c.moveToNext();
+			}
+			c.close();
+		}
+
+		return assets;
+	}
+
 
 	/*******************************/
 	/***** LOCATIONS Functions *****/
